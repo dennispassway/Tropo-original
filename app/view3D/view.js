@@ -1,59 +1,50 @@
-var updateDelay = 100;
-
-/* ---------------------------------------- Socket Gebeuren---------------------------------------- */
-
-// Connect Socket
-var socketRhino = 'http://192.168.124.82:3000';
-var socketHome = 'http://192.168.0.102:3000';
-var socketHoog = 'http://192.168.1.139:3000';
-var socket = io.connect(socketRhino);
-
-// Variabelen
-var controller = [0,0,0,0,0,0];
-
-// Socketdata ophalen
-socket.on('controllerData', function (data) {
-  controller = data;
-});
-
 /* ---------------------------------------- Begint 3JS ---------------------------------------- */
 
-// Scene en camera
-var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+function init() {
+  // Scene maken
+  var scene = new THREE.Scene(); //Randen Scene instellen
 
-// Renderer
-var renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+  // Camera maken
+  var fov = 100;
+  var aspectRatio = window.innerWidth/window.innerHeight;
+  var near = 1;
+  var far = 10000;
+  var camera = new THREE.PerspectiveCamera(fov,aspectRatio,near,far);
+  // Startpositie camera instellen
+  camera.position.z = 5;
 
-// Bal toevoegen
-var geometry = new THREE.SphereGeometry(2);
-var material = new THREE.MeshBasicMaterial({color: 0xA9CC52});
-var planet = new THREE.Mesh(geometry, material);
-scene.add(planet);
+  // Renderer instellen
+  var renderer = new THREE.WebGLRenderer();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
 
-camera.position.x = 5; // gamma -5 - 5
-camera.position.y = 5; // beta -5 - 5
-camera.position.z = 20; // 0 - 20
+  // Objecten in ruimte
+  var geometry = new THREE.SphereGeometry(2,5,5);
+  var blauwMaterial = new THREE.MeshBasicMaterial( {color: 0x5CACF2} );
+  var roodMaterial = new THREE.MeshBasicMaterial( {color: 0xF20505} );
+  var blauwePlaneet = new THREE.Mesh(geometry, blauwMaterial);
+  var rodePlaneet = new THREE.Mesh(geometry, roodMaterial);
+  scene.add(blauwePlaneet);
+  scene.add(rodePlaneet);
+  blauwePlaneet.position.set(5,2,-2);
 
-// Camera vliegen met socket
-setInterval(function(){
-  // console.log(controller);
-  // camera.position.x = controller[2]/9;
-  // camera.position.y = controller[0]/18;
-  // camera.position.z = controller[1];
-}, updateDelay);
+  // Renderfunctie
+  var render = function () {
+    requestAnimationFrame(render);
 
-// Renderfunctie
-var render = function () {
-  requestAnimationFrame(render);
+    blauwePlaneet.rotation.x += 0.05;
+    blauwePlaneet.rotation.y += 0.05;
+    rodePlaneet.rotation.x += 0.05;
+    rodePlaneet.rotation.y += 0.05;
 
-  planet.rotation.y += 0.05;
-  planet.rotation.x += 0.01;
+    renderer.render(scene, camera);
+  };
 
-  renderer.render(scene, camera);
-};
+  // Renderen
+  render();
+}
 
-// Renderen
-render();
+init();
+
+  // Loggen en debuggen
+  console.log(scene);
