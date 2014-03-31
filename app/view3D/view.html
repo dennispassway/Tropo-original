@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
- 
+  
   <title>SuperController</title>
   <meta name="viewport" content="width=device-width,height=device-height, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -16,27 +16,12 @@
   <link rel="apple-touch-icon" sizes="144x144" href="../icons/apple-touch-icon-144x144.png" />
   <link rel="apple-touch-icon" sizes="152x152" href="../icons/apple-touch-icon-152x152.png" />
 
+  <script src="../three.min.js"></script>
   <script src="../jquery.js"></script>
   <script src="/socket.io/socket.io.js"></script>
-  <script src="controller.js"></script>
+  
 </head>
-<body class="controller">
-
-  <div class="container">
-
-    <div id="gyro">
-      Uw Kompas: <span id="alpha"></span><br>
-      Uw Hoogte: <span id="beta"></span><br>
-      Uw Hoek: <span id="gamma"></span>
-    </div>
-
-    <div id="accelero">
-      Uw kompas versnelling: <span id="arAlpha"></span> m/s<br>
-      Uw hoogte versnelling: <span id="arBeta"></span> m/s<br>
-      Uw hoek versnelling: <span id="arGamma"></span> m/s
-    </div>
-
-  </div>
-
+<body>
+  <script src="view.js"></script>
 </body>
 </html>

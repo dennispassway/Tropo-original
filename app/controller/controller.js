@@ -11,24 +11,25 @@ var updateDelay = 100;
 var arAlpha = 0;
 var arBeta = 0;
 var arGamma = 0;
-
 window.ondevicemotion = function(event) {
-  ax = event.accelerationIncludingGravity.x
-  ay = event.accelerationIncludingGravity.y
-  az = event.accelerationIncludingGravity.z
+  ax = event.acceleration.x
+  ay = event.acceleration.y
+  az = event.acceleration.z
   rotation = event.rotationRate;
-  if (rotation != null) {
+  /*if (rotation != null) {
     arAlpha = Math.round(rotation.alpha);
     arBeta = Math.round(rotation.beta);
     arGamma = Math.round(rotation.gamma);
-  }
+  }*/
+  arAlpha = Math.round(ax);
+  arBeta = Math.round(ay);
+  arGamma = Math.round(az);
 }
 
 // Gyroscope
 var alpha = 1;
 var beta = 1;
 var gamma = 1;
-
 window.ondeviceorientation = function(event) {
   alpha = Math.round(event.alpha);
   beta = Math.round(event.beta);
@@ -42,13 +43,13 @@ setInterval(function() {
   $('#beta').html(beta);
   $('#gamma').html(gamma);
 
-  /*$('#arAlpha').html('arAlpha ' + arAlpha);
-  $('#arBeta').html('arBeta ' + arBeta);
-  $('#arGamma').html('arGamma ' + arGamma);*/
+  $('#arAlpha').html(arAlpha);
+  $('#arBeta').html(arBeta);
+  $('#arGamma').html(arGamma);
 }, updateDelay);
 
 // Naar Socket sturen
 setInterval(function() {
-  var controllerData = [alpha,beta,gamma];
+  var controllerData = [alpha,beta,gamma,arAlpha,arBeta,arGamma];
   socket.emit('controllerMovement', controllerData);
 }, updateDelay);

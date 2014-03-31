@@ -6,28 +6,35 @@ var socket = io.connect(socketRhino);
 
 // Variabelen
 var updateDelay = 100;
-var gyroController = [0,0,0];
+var controller = [0,0,0,0,0,0];
 
 // Socketdata ophalen
 socket.on('controllerData', function (data) {
-  gyroController = data;
+  controller = data;
 });
 
 // Verwerk Data
 setInterval(function() {
-// Gyroscoop
-var alpha = gyroController[0];
-var beta = gyroController[1];
-var gamma = gyroController[2];
 
-// Bruikdingen
+// Gyroscoop
+var alpha = controller[0];
+var beta = controller[1];
+var gamma = controller[2];
+// Accelerometer
+var arAlpha = controller[3];
+var arBeta = controller[4];
+var arGamma = controller[5];
+
+// Variabelen
 var vloer = $('.vloer');
 var draaidiv = $('.draaidiv');
 var twee = $('.twee');
 var drie = $('.drie');
 var baseline = -70;
+
+// Data
 var hoogte = beta/3.6;
-var kanteling = gamma/9;
+var kanteling = gamma/18;
 var bocht = alpha/3.6;
 
 // Hoogte grond
@@ -43,8 +50,3 @@ twee.css('left', bocht + '%');
 drie.css('left', (100+bocht) + '%');
 
 }, updateDelay);
-
-//Sound
-var audio = new Audio('../plane.mp3');
-audio.loop = true;
-audio.play();

@@ -14,12 +14,6 @@ body {
 }
 
 /* Controller */
-.controller {
-  background-image: url('../img/plane.png');
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
 #gyro,#accelero {
   padding: 30px;
   /*display: none;*/
