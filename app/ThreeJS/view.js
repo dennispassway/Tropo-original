@@ -9,10 +9,10 @@ document.body.appendChild(renderer.domElement);
 var scene= new THREE.Scene();
 
 // Initiate camera
-var fov = 100;
+var fov = 60;
 var ratio = window.innerWidth/window.innerHeight;
-var near = 0.1;
-var far = 1000;
+var near = 1;
+var far = 20000;
 var camera = new THREE.PerspectiveCamera( fov, ratio, near, far );
 camera.position.z = 10;
 
@@ -26,10 +26,11 @@ var maanGeo = new THREE.SphereGeometry(1,20,20);
 
 // Images
 var aardeImg =  THREE.ImageUtils.loadTexture('../img/earth.jpg');
+var maanImg = THREE.ImageUtils.loadTexture('../img/moon.jpg');
 
 // Materials
 var aardeMaterial = new THREE.MeshPhongMaterial( { map: aardeImg } );
-var maanMaterial = new THREE.MeshPhongMaterial( {color: 0x999999} );
+var maanMaterial = new THREE.MeshPhongMaterial( {map: maanImg} );
 
 // Meshes
 var aarde = new THREE.Mesh(aardeGeo, aardeMaterial);
