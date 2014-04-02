@@ -3,6 +3,10 @@
 var container, scene, camera, renderer;
 
 // Other Variables
+var vloer = [];
+var rij0 = [];
+var rij1 = [];
+var rij2 = [];
 var tiles = [];
 
 // Initialize and animate
@@ -50,29 +54,6 @@ function init() {
 }
 
 /*---- Vloer ----*/
-// Maak tiles
-function makeTiles(rows,cols) {
-  // Leegmaken
-  if (tiles) {
-    for (var b = 0; b < tiles.length; b++) {
-      scene.remove(tiles[b]);
-    }
-  }
-  tiles = [];
-
-  var aantalRijen = rows;
-  var aantalKolommen = cols;
-  for (var i = 0; i < aantalRijen; i++) {
-    for (var a = 0; a < aantalKolommen; a++) {
-      createTile(0xff0000,a*51,i*51);
-    }
-  }
-
-  for (var b = 0; b < tiles.length; b++) {
-    scene.add(tiles[b]);
-  }
-}
-
 // Maak tile
 function createTile(kleur,posX,posZ) {
   var tile;
@@ -83,7 +64,36 @@ function createTile(kleur,posX,posZ) {
   tile.position.y = -0.5;
   tile.position.z = posZ;
   tile.rotation.x = Math.PI / 2;
-  tiles.push(tile);
+  return tile;
+}
+
+// Maak vloer
+function makeTiles(rows,cols) {
+  // Leegmaken
+  if (tiles) {
+    for (var b = 0; b < tiles.length; b++) {
+      scene.remove(tiles[b]);
+    }
+  }
+  tiles = [];
+
+  // Tegels maken
+  var aantalRijen = rows;
+  var aantalKolommen = cols;
+  for (var i = 0; i < aantalRijen; i++) {
+    for (var a = 0; a < aantalKolommen; a++) {
+      eval('rij'+i).push(createTile(0xff0000,a*51,i*51));
+    }
+    vloer.push(eval('rij'+i));
+  }
+
+  // Tegels plaatsen
+  for (var i = 0; i < vloer.length; i ++) {
+      for (var a= 0; a < eval('rij' + i).length; a++){
+        scene.add(vloer[i][a]);
+    }
+  }
+
 }
 
 // Animate
