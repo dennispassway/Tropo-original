@@ -47,6 +47,7 @@ function init() {
 
   window.addEventListener( 'resize', onWindowResize, false );
 
+  // Sprites
   for (var s = 0; s < jsonSet.length; s++) {
     function makeSprite() {
       var spriteTexture = THREE.ImageUtils.loadTexture( jsonSet[s].img );
@@ -58,6 +59,17 @@ function init() {
     }
     makeSprite();
   }
+
+  // Collada Models
+  var loader = new THREE.ColladaLoader();
+  loader.load('wolk.dae', function (result) {
+    wolk = result.scene;
+    console.log(wolk.children[0]);
+    wolk.position.set(100,100,100);
+    wolk.scale.set(50,50,50);
+    var wolkTexture = new THREE.MeshBasicMaterial( {color: 0x64A0E1} );
+    scene.add(wolk);
+  });
 
 }
 

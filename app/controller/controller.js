@@ -2,7 +2,7 @@
 var socketRhino = 'http://192.168.124.147:3000';
 var socketHome = 'http://192.168.0.102:3000';
 var socketHoog = 'http://192.168.1.139:3000';
-var socket = io.connect(socketRhino);
+var socket = io.connect(socketHome);
 
 // Variabelen
 var updateDelay = 100;
