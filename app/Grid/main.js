@@ -3,7 +3,7 @@
 var container, scene, camera, renderer;
 
 // Other Variables
-var aarde;
+var tiles = [];
 
 // Initialize and animate
 init();
@@ -45,44 +45,70 @@ function init() {
   // Sky
   scene.fog = new THREE.FogExp2( 0x9999ff, 0.00025 );
 
-  // Vloer
-  function createFloor(kleur,posX,posZ) {
-    var floor;
-    var floorGeometry = new THREE.PlaneGeometry( 50, 50, 1, 1 );
-    var floorMaterial = new THREE.MeshBasicMaterial( {color: kleur, side:THREE.DoubleSide} );
-    floor = new THREE.Mesh(floorGeometry, floorMaterial);
-    floor.position.x = posX;
-    floor.position.y = -0.5;
-    floor.position.z = posZ;
-    floor.rotation.x = Math.PI / 2;
-    scene.add(floor);
-  }
+  // Maak standaard vloer
+  makeTiles(3,3);
+}
 
-  // Grid Maken
-  var aantalRijen = 3;
-  var aantalKolommen = 3;
+/*---- Vloer ----*/
+// Maak tiles
+function makeTiles(rows,cols) {
+  // Leegmaken
+  if (tiles) {
+    for (var b = 0; b < tiles.length; b++) {
+      scene.remove(tiles[b]);
+    }
+  }
+  tiles = [];
+
+  var aantalRijen = rows;
+  var aantalKolommen = cols;
   for (var i = 0; i < aantalRijen; i++) {
     for (var a = 0; a < aantalKolommen; a++) {
-      createFloor(0xff0000,a*51,i*51);
+      createTile(0xff0000,a*51,i*51);
     }
+  }
+
+  for (var b = 0; b < tiles.length; b++) {
+    scene.add(tiles[b]);
   }
 }
 
-
+// Maak tile
+function createTile(kleur,posX,posZ) {
+  var tile;
+  var tileGeometry = new THREE.PlaneGeometry( 50, 50, 1, 1 );
+  var tileMaterial = new THREE.MeshBasicMaterial( {color: kleur, side:THREE.DoubleSide} );
+  tile = new THREE.Mesh(tileGeometry, tileMaterial);
+  tile.position.x = posX;
+  tile.position.y = -0.5;
+  tile.position.z = posZ;
+  tile.rotation.x = Math.PI / 2;
+  tiles.push(tile);
+}
 
 // Animate
 function animate() {
   requestAnimationFrame(animate);
+
+  // Animaties
+  document.addEventListener("keydown", drukOpKnop, false);
+  function drukOpKnop(e) {
+  var keyCode = e.keyCode;
+    if(keyCode == 32) {
+      makeTiles(2,2);
+    }
+  }
+
   render();
   update();
-}
-
-// Update
-function update() {
-  
 }
 
 // Render
 function render() {
   renderer.render(scene, camera);
+}
+
+// Update
+function update() {
+  
 }
