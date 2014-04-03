@@ -12,7 +12,7 @@ function init() {
 
   // Controls
   controls = new THREE.FirstPersonControls( camera );
-  controls.movementSpeed = 150;
+  controls.movementSpeed = 350;
   controls.lookSpeed = 0.1;
 
   // Scene
@@ -45,33 +45,33 @@ function init() {
   container.innerHTML = "";
   container.appendChild( renderer.domElement );
 
-  window.addEventListener( 'resize', onWindowResize, false );
-
-  // Sprites
-  for (var s = 0; s < jsonSet.length; s++) {
-    function makeSprite() {
-      var spriteTexture = THREE.ImageUtils.loadTexture( jsonSet[s].img );
-      var spriteMaterial = new THREE.SpriteMaterial( {map: spriteTexture} );
-      sprite = new THREE.Sprite( spriteMaterial );
-      sprite.position.set(jsonSet[s].x, jsonSet[s].z, jsonSet[s].y);
-      sprite.scale.set(100,100);
-      scene.add(sprite);
-    }
-    makeSprite();
+  // Modellen laden
+  for (var m = 0; m < jsonSet.length; m++){
+    modellenLaden(m);
   }
 
-  // Collada Models
-  var loader = new THREE.ColladaLoader();
-  loader.load('model/wolk.dae', function (result) {
-    wolk = result.scene;
-    console.log(wolk.children[0]);
-    wolk.position.set(100,100,100);
-    wolk.scale.set(500,500,500);
-    var wolkTexture = new THREE.MeshBasicMaterial( {color: 0x64A0E1} );
-    scene.add(wolk);
-  });
+  window.addEventListener( 'resize', onWindowResize, false );
 
 }
+
+var loader = [];
+  // Collada Models
+  function modellenLaden(m) {
+    loader[m] = new THREE.ColladaLoader();
+    loader[m].load(String('model/' + jsonSet[m].model + '.dae'), function (result) {
+      object = result.scene;
+      object.position.set(jsonSet[m].x, jsonSet[m].z, jsonSet[m].y);
+      object.scale.set(jsonSet[m].scale, jsonSet[m].scale, jsonSet[m].scale);
+
+      // Fuck het licht
+      object.children[0].material.emissive.r = 1;
+      object.children[0].material.emissive.g = 1;
+      object.children[0].material.emissive.b = 1;
+      // Einde fuck het licht
+
+      scene.add(object);
+    });
+  }
 
 // Window resize functie
 function onWindowResize() {

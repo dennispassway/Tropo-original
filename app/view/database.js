@@ -4,12 +4,13 @@ $.getJSON('https://spreadsheets.google.com/feeds/list/0AtGWqQf8eM2OdHVsS2w2QWI5N
 
   for (var i = 0; i < data.feed.entry.length; i++) {
     name = data.feed.entry[i].gsx$name.$t;
-    img = data.feed.entry[i].gsx$img.$t;
+    model = data.feed.entry[i].gsx$model.$t;
     x = data.feed.entry[i].gsx$x.$t;
     y = data.feed.entry[i].gsx$y.$t;
     z = data.feed.entry[i].gsx$z.$t;
+    scale = data.feed.entry[i].gsx$scale.$t;
     // Object in jsonSet gooien
-    var object = {'name': name, 'img': img, 'x': x, 'y': y, 'z': z};
+    var object = {'name': name, 'model': model, 'x': x, 'y': y, 'z': z, 'scale': scale};
     jsonSet.push(object);
 
     // Als forloop klaar is, is database klaar, dus init.
