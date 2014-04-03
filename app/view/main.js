@@ -62,11 +62,11 @@ function init() {
 
   // Collada Models
   var loader = new THREE.ColladaLoader();
-  loader.load('wolk.dae', function (result) {
+  loader.load('model/wolk.dae', function (result) {
     wolk = result.scene;
     console.log(wolk.children[0]);
     wolk.position.set(100,100,100);
-    wolk.scale.set(50,50,50);
+    wolk.scale.set(500,500,500);
     var wolkTexture = new THREE.MeshBasicMaterial( {color: 0x64A0E1} );
     scene.add(wolk);
   });
