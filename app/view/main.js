@@ -14,6 +14,7 @@ function init() {
   controls = new THREE.FirstPersonControls( camera );
   controls.movementSpeed = 350;
   controls.lookSpeed = 0.1;
+  controls.autoForward = false;
 
   // Scene
   scene = new THREE.Scene();
@@ -84,6 +85,12 @@ function onWindowResize() {
 // Animate
 function animate() {
   requestAnimationFrame( animate );
+
+  // Solid floor
+  if (camera.position.y < 0) {
+    camera.position.y = 0;
+  };
+
   render();
 }
 

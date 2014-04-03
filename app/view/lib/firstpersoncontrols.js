@@ -234,8 +234,12 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 
     }
 
+    // Mouse Controls
     this.lon += this.mouseX * actualLookSpeed;
     if( this.lookVertical ) this.lat -= this.mouseY * actualLookSpeed * verticalLookRatio;
+    // iPhone Controls
+/*    this.lon += kanteling * actualLookSpeed;
+    if( this.lookVertical ) this.lat -= hoogte * actualLookSpeed * verticalLookRatio;*/
 
     this.lat = Math.max( - 85, Math.min( 85, this.lat ) );
     this.phi = THREE.Math.degToRad( 90 - this.lat );
