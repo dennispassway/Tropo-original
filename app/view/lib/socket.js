@@ -3,7 +3,8 @@ var socketKabel = 'http://192.168.124.147:3000';
 var socketWifi = 'http://192.168.124.82:3000';
 var socketHome = 'http://192.168.0.102:3000';
 var socketHoog = 'http://192.168.1.139:3000';
-var socket = io.connect(socketWifi);
+var localHost = 'http://localhost:3000';
+var socket = io.connect(localHost);
 
 // Variabelen
 var updateDelay = 100;

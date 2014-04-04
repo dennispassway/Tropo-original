@@ -6,6 +6,10 @@ var clock = new THREE.Clock();
 function init() {
   container = document.getElementById( 'container' );
 
+  // Scene
+  scene = new THREE.Scene();
+  // scene.fog = new THREE.FogExp2( 0x64A0E1, 0.0007 );
+
   // Camera
   camera = new THREE.PerspectiveCamera( 100, window.innerWidth / window.innerHeight, 1, 10000 );
   camera.position.set(-500,500,0);
@@ -16,10 +20,6 @@ function init() {
   controls.lookSpeed = 0.1;
   controls.autoForward = false;
 
-  // Scene
-  scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2( 0x64A0E1, 0.001 );
-
   // Sunlight
   var ambient = new THREE.AmbientLight( 0x333333 );
   scene.add(ambient);
@@ -27,8 +27,16 @@ function init() {
   zon.position.set(0,200,0);
   scene.add(zon);
 
+  // Bounding Box
+  var cubeGroote = 5000;
+  var worldBoxGeometry = new THREE.CubeGeometry(cubeGroote,cubeGroote,cubeGroote);
+  var worldBoxTexture = new THREE.ImageUtils.loadTexture('img/sky-gay.png');
+  var worldBoxMaterial = new THREE.MeshBasicMaterial( { side:THREE.BackSide, map: worldBoxTexture} );
+  var worldBox = new THREE.Mesh(worldBoxGeometry, worldBoxMaterial);
+  scene.add(worldBox);
+
   // Vloer
-  var vloerGeometry = new THREE.PlaneGeometry( 7000, 7000); // Canvas van 1000x1000, langer gemaakt voor oneindigheid!
+  var vloerGeometry = new THREE.PlaneGeometry( 5000, 5000); // Canvas van 1000x1000, langer gemaakt voor oneindigheid!
   vloerGeometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
   var vloerBump = THREE.ImageUtils.loadTexture('img/bumpmap.jpg');
   var vloerBumpScale = 5;
@@ -38,7 +46,7 @@ function init() {
   scene.add( vloer );
 
   // Renderer
-  renderer = new THREE.WebGLRenderer();
+  renderer = new THREE.WebGLRenderer( {antialias : true});
   renderer.setClearColor( 0x64A0E1 );
   renderer.setSize( window.innerWidth, window.innerHeight );
 
@@ -52,7 +60,6 @@ function init() {
   }
 
   window.addEventListener( 'resize', onWindowResize, false );
-
 }
 
 var loader = [];
@@ -98,4 +105,13 @@ function animate() {
 function render() {
   controls.update( clock.getDelta() );
   renderer.render( scene, camera );
+}
+
+// Sounds
+playSound();
+function playSound() {
+  var backgroundMusic = new Audio('sounds/soundWithBeat.mp3');
+  backgroundMusic.loop = true;
+  backgroundMusic.volume = 0.5;
+  backgroundMusic.play();
 }
