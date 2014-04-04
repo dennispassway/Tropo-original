@@ -8,17 +8,14 @@ function init() {
 
   // Scene
   scene = new THREE.Scene();
-  // scene.fog = new THREE.FogExp2( 0x64A0E1, 0.0007 );
+  scene.fog = new THREE.FogExp2( 0x64A0E1, 0.0004 );
 
   // Camera
   camera = new THREE.PerspectiveCamera( 100, window.innerWidth / window.innerHeight, 1, 10000 );
-  camera.position.set(-500,500,0);
+  camera.position.set(-1000,1000,0);
 
   // Controls
   controls = new THREE.FirstPersonControls( camera );
-  controls.movementSpeed = 350;
-  controls.lookSpeed = 0.1;
-  // controls.autoForward = true;
 
   // Sunlight
   var ambient = new THREE.AmbientLight( 0x333333 );
@@ -28,7 +25,7 @@ function init() {
   scene.add(zon);
 
   // Bounding Box
-  var cubeGroote = 5000;
+  var cubeGroote = 8000;
   var worldBoxGeometry = new THREE.CubeGeometry(cubeGroote,cubeGroote,cubeGroote);
   var worldBoxTexture = new THREE.ImageUtils.loadTexture('img/sky-gay.jpg');
   var worldBoxMaterial = new THREE.MeshBasicMaterial( { side:THREE.BackSide, map: worldBoxTexture} );
@@ -36,7 +33,7 @@ function init() {
   scene.add(worldBox);
 
   // Vloer
-  var vloerGeometry = new THREE.PlaneGeometry( 5000, 5000); // Canvas van 1000x1000, langer gemaakt voor oneindigheid!
+  var vloerGeometry = new THREE.PlaneGeometry(cubeGroote, cubeGroote);
   vloerGeometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
   var vloerBump = THREE.ImageUtils.loadTexture('img/bumpmap.jpg');
   var vloerBumpScale = 5;
@@ -89,14 +86,22 @@ function onWindowResize() {
   controls.handleResize();
 }
 
+// Movement Box
+function movementBox() {
+  if (camera.position.y < 0) { camera.position.y = 0; }
+  if (camera.position.y > 2000) { camera.position.y = 2000; }
+  if (camera.position.x < -1000) {camera.position.x = -1000};
+  if (camera.position.x > 1000) {camera.position.x = 1000};
+  if (camera.position.z < -1000) {camera.position.z = -1000};
+  if (camera.position.z > 1000) {camera.position.z = 1000};
+}
+
 // Animate
 function animate() {
   requestAnimationFrame( animate );
 
-  // Solid floor
-  if (camera.position.y < 0) {
-    camera.position.y = 0;
-  };
+  // Movement Box
+  movementBox();
 
   render();
 }

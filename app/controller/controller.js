@@ -1,9 +1,5 @@
 // Connect Socket
-var socketKabel = 'http://192.168.124.147:3000';
-var socketWifi = 'http://192.168.124.82:3000';
-var socketHome = 'http://192.168.0.102:3000';
-var socketHoog = 'http://192.168.1.139:3000';
-var socket = io.connect(socketKabel);
+var socket = io.connect('http://192.168.124.147:3000');
 
 // Variabelen
 var updateDelay = 100;
@@ -37,26 +33,24 @@ window.ondeviceorientation = function(event) {
   gamma = Math.round(event.gamma);
 }
 
+// Naar Socket sturen
+setInterval(function() {
+  var controllerData = [alpha,beta,gamma,arAlpha,arBeta,arGamma];
+  socket.emit('controllerMovement', controllerData);
+}, updateDelay);
+
 // Tekenen in scherm
 setInterval(function() {
-  // Waarde tekenen
   document.getElementById('alpha').innerHTML = '';
   document.getElementById('alpha').appendChild(document.createTextNode(alpha));
   document.getElementById('beta').innerHTML = '';
   document.getElementById('beta').appendChild(document.createTextNode(beta));
   document.getElementById('gamma').innerHTML = '';
   document.getElementById('gamma').appendChild(document.createTextNode(gamma));
-
   document.getElementById('arAlpha').innerHTML = '';
   document.getElementById('arAlpha').appendChild(document.createTextNode(arAlpha));
   document.getElementById('arBeta').innerHTML = '';
   document.getElementById('arBeta').appendChild(document.createTextNode(arBeta));
   document.getElementById('arGamma').innerHTML = '';
   document.getElementById('arGamma').appendChild(document.createTextNode(arGamma));
-}, updateDelay);
-
-// Naar Socket sturen
-setInterval(function() {
-  var controllerData = [alpha,beta,gamma,arAlpha,arBeta,arGamma];
-  socket.emit('controllerMovement', controllerData);
 }, updateDelay);
