@@ -4,7 +4,7 @@ var socketWifi = 'http://192.168.124.82:3000';
 var socketHome = 'http://192.168.0.102:3000';
 var socketHoog = 'http://192.168.1.139:3000';
 var localHost = 'http://localhost:3000';
-var socket = io.connect(localHost);
+var socket = io.connect(socketKabel);
 
 // Variabelen
 var updateDelay = 100;
@@ -29,7 +29,7 @@ var arAlpha = controller[3];
 var arBeta = controller[4];
 var arGamma = controller[5];
 
-hoogte = beta/3.6;
+hoogte = -beta*4;
 kanteling = gamma*7;
 bocht = alpha/3.6;
 

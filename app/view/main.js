@@ -18,7 +18,7 @@ function init() {
   controls = new THREE.FirstPersonControls( camera );
   controls.movementSpeed = 350;
   controls.lookSpeed = 0.1;
-  controls.autoForward = false;
+  // controls.autoForward = true;
 
   // Sunlight
   var ambient = new THREE.AmbientLight( 0x333333 );
@@ -30,7 +30,7 @@ function init() {
   // Bounding Box
   var cubeGroote = 5000;
   var worldBoxGeometry = new THREE.CubeGeometry(cubeGroote,cubeGroote,cubeGroote);
-  var worldBoxTexture = new THREE.ImageUtils.loadTexture('img/sky-gay.png');
+  var worldBoxTexture = new THREE.ImageUtils.loadTexture('img/sky-gay.jpg');
   var worldBoxMaterial = new THREE.MeshBasicMaterial( { side:THREE.BackSide, map: worldBoxTexture} );
   var worldBox = new THREE.Mesh(worldBoxGeometry, worldBoxMaterial);
   scene.add(worldBox);
@@ -50,14 +50,14 @@ function init() {
   renderer.setClearColor( 0x64A0E1 );
   renderer.setSize( window.innerWidth, window.innerHeight );
 
-  // Create World
-  container.innerHTML = "";
-  container.appendChild( renderer.domElement );
-
   // Modellen laden
   for (var m = 0; m < jsonSet.length; m++){
     modellenLaden(m);
   }
+
+  // Create World
+  container.innerHTML = "";
+  container.appendChild( renderer.domElement );
 
   window.addEventListener( 'resize', onWindowResize, false );
 }
@@ -108,7 +108,7 @@ function render() {
 }
 
 // Sounds
-playSound();
+// playSound();
 function playSound() {
   var backgroundMusic = new Audio('sounds/soundWithBeat.mp3');
   backgroundMusic.loop = true;
