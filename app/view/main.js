@@ -47,6 +47,27 @@ function init() {
   buildWorld();
 
   window.addEventListener( 'resize', onWindowResize, false );
+
+  // Tween
+  var position = { x : 0, y: 0 };
+  var target = { x : 2000, y: 50 };
+  var tweenVooruit = new TWEEN.Tween(position).to(target, 10000);
+  tweenVooruit.easing(TWEEN.Easing.Circular.Out);
+  tweenVooruit.onUpdate(function(){
+      object[0].position.x = position.x;
+      object[0].position.y = position.y;
+  });
+
+  var tweenAchteruit = new TWEEN.Tween(position).to({ x : 0, y: 0 }, 10000);
+  tweenAchteruit.easing(TWEEN.Easing.Circular.Out);
+  tweenAchteruit.onUpdate(function(){
+      object[0].position.x = position.x;
+      object[0].position.y = position.y;
+  });
+  tweenVooruit.chain(tweenAchteruit);
+  tweenAchteruit.chain(tweenVooruit);
+
+  tweenVooruit.start();
 }
 
 // Create World
@@ -56,15 +77,16 @@ function buildWorld() {
 }
 
 var loader = [];
+var object = [];
   // Collada Models
   function modellenLaden(m) {
     loader[m] = new THREE.ColladaLoader();
     loader[m].load(String('model/' + jsonSet[m].model + '.dae'), function (result) {
-      object = result.scene;
-      object.position.set(jsonSet[m].x, jsonSet[m].z, jsonSet[m].y);
-      object.scale.set(jsonSet[m].scale, jsonSet[m].scale, jsonSet[m].scale);
-      object.rotation.set(toDegree(jsonSet[m].rotationX),toDegree(jsonSet[m].rotationY),toDegree(jsonSet[m].rotationZ));
-      scene.add(object);
+      object[m] = result.scene;
+      object[m].position.set(jsonSet[m].x, jsonSet[m].z, jsonSet[m].y);
+      object[m].scale.set(jsonSet[m].scale, jsonSet[m].scale, jsonSet[m].scale);
+      object[m].rotation.set(toDegree(jsonSet[m].rotationX),toDegree(jsonSet[m].rotationY),toDegree(jsonSet[m].rotationZ));
+      scene.add(object[m]);
     });
   }
 
@@ -96,6 +118,8 @@ function movementBox() {
 function animate() {
   requestAnimationFrame( animate );
   movementBox();
+  // Update tweens
+  TWEEN.update();
   render();
 }
 
