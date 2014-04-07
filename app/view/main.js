@@ -1,6 +1,8 @@
 var container, camera, controls, scene, renderer;
 var clock = new THREE.Clock();
 
+var numScreens = 1;
+
 // Init en animate worden gerunt wanneer database klaar is.
 
 function init() {
@@ -11,8 +13,8 @@ function init() {
   scene.fog = new THREE.FogExp2( 0x64A0E1, 0.0004 );
 
   // Camera
-  camera = new THREE.PerspectiveCamera( 100, window.innerWidth / window.innerHeight, 1, 10000 );
-  camera.position.set(-1000,1000,0);
+  camera = new THREE.PerspectiveCamera( 100, window.innerWidth*numScreens / window.innerHeight, 1, 10000 );
+  camera.position.set(-2000,-2000,0);
 
   // Controls
   controls = new THREE.FirstPersonControls( camera );
@@ -32,31 +34,25 @@ function init() {
   var worldBox = new THREE.Mesh(worldBoxGeometry, worldBoxMaterial);
   scene.add(worldBox);
 
-  // Vloer
-  var vloerGeometry = new THREE.PlaneGeometry(cubeGroote, cubeGroote);
-  vloerGeometry.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
-  var vloerBump = THREE.ImageUtils.loadTexture('img/bumpmap.jpg');
-  var vloerBumpScale = 5;
-  var vloerMaterial = new THREE.MeshPhongMaterial( {color: 0xDEDEDE, bumpMap: vloerBump, bumpScale: vloerBumpScale} );
-  vloer = new THREE.Mesh( vloerGeometry, vloerMaterial );
-  vloer.position.set(0,-50,0);
-  scene.add( vloer );
-
   // Renderer
   renderer = new THREE.WebGLRenderer( {antialias : true});
   renderer.setClearColor( 0x64A0E1 );
-  renderer.setSize( window.innerWidth, window.innerHeight );
+  renderer.setSize( window.innerWidth*numScreens, window.innerHeight );
 
   // Modellen laden
   for (var m = 0; m < jsonSet.length; m++){
     modellenLaden(m);
   }
 
-  // Create World
-  container.innerHTML = "";
-  container.appendChild( renderer.domElement );
+  buildWorld();
 
   window.addEventListener( 'resize', onWindowResize, false );
+}
+
+// Create World
+function buildWorld() {
+  container.innerHTML = "";
+  container.appendChild( renderer.domElement );
 }
 
 var loader = [];
@@ -67,16 +63,16 @@ var loader = [];
       object = result.scene;
       object.position.set(jsonSet[m].x, jsonSet[m].z, jsonSet[m].y);
       object.scale.set(jsonSet[m].scale, jsonSet[m].scale, jsonSet[m].scale);
-
-      // Fuck het licht
-      object.children[0].material.emissive.r = 1;
-      object.children[0].material.emissive.g = 1;
-      object.children[0].material.emissive.b = 1;
-      // Einde fuck het licht
-
+      object.rotation.set(toDegree(jsonSet[m].rotationX),toDegree(jsonSet[m].rotationY),toDegree(jsonSet[m].rotationZ));
       scene.add(object);
     });
   }
+
+// Radians to degree
+function toDegree(degree) {
+  radian = degree/57.2957795;
+  return radian;
+}
 
 // Window resize functie
 function onWindowResize() {
@@ -86,7 +82,7 @@ function onWindowResize() {
   controls.handleResize();
 }
 
-// Movement Box
+// Box to limit maximum movement
 function movementBox() {
   if (camera.position.y < 0) { camera.position.y = 0; }
   if (camera.position.y > 2000) { camera.position.y = 2000; }
@@ -99,10 +95,7 @@ function movementBox() {
 // Animate
 function animate() {
   requestAnimationFrame( animate );
-
-  // Movement Box
   movementBox();
-
   render();
 }
 
@@ -110,13 +103,4 @@ function animate() {
 function render() {
   controls.update( clock.getDelta() );
   renderer.render( scene, camera );
-}
-
-// Sounds
-// playSound();
-function playSound() {
-  var backgroundMusic = new Audio('sounds/soundWithBeat.mp3');
-  backgroundMusic.loop = true;
-  backgroundMusic.volume = 0.5;
-  backgroundMusic.play();
 }
