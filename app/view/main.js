@@ -12,7 +12,6 @@ function init() {
 
   // Camera
   camera = new THREE.PerspectiveCamera( 100, window.innerWidth / window.innerHeight, 1, 10000 );
-  // camera = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 1, 10000 );
   camera.position.set(-2000,-2000,0);
 
   // Controls
@@ -47,23 +46,6 @@ function buildWorld() {
   container.innerHTML = "";
   container.appendChild( renderer.domElement );
 }
-
-  // // createTween wordt aangeroepn door handler, geeft object mee.
-  // function createTween(target) {
-  //   createjs.Tween.get(target)
-  //          .to({
-  //           x: Math.floor(Math.random() * 1000) + 1000,
-  //           y: Math.floor(Math.random() * 2000) + 0,
-  //           z: Math.floor(Math.random() * 1000) + -1000
-  //          }, 5000)
-  //          .call( tweenCompleteHandler( target ));
-  // }
-
-  // // handler runt createTween weer, met object.
-  // function tweenCompleteHandler(target) {
-  //   console.log('hoi');
-  //   createTween( target );
-  // }
 
   // Tween
   function tweenin() {
