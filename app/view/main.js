@@ -1,8 +1,6 @@
 var container, camera, controls, scene, renderer;
 var clock = new THREE.Clock();
 
-var numScreens = 1;
-
 // Init en animate worden gerunt wanneer database klaar is.
 
 function init() {
@@ -10,34 +8,29 @@ function init() {
 
   // Scene
   scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2( 0x64A0E1, 0.0004 );
+  scene.fog = new THREE.FogExp2( 0xA2BED8, 0.00035 );
 
   // Camera
-  camera = new THREE.PerspectiveCamera( 100, window.innerWidth*numScreens / window.innerHeight, 1, 10000 );
+  camera = new THREE.PerspectiveCamera( 100, window.innerWidth / window.innerHeight, 1, 10000 );
+  // camera = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 1, 10000 );
   camera.position.set(-2000,-2000,0);
 
   // Controls
   controls = new THREE.FirstPersonControls( camera );
 
-  // Sunlight
-  var ambient = new THREE.AmbientLight( 0x333333 );
-  scene.add(ambient);
-  var zon = new THREE.DirectionalLight(0xffffff, 1);
-  zon.position.set(0,200,0);
-  scene.add(zon);
-
   // Bounding Box
-  var cubeGroote = 8000;
-  var worldBoxGeometry = new THREE.CubeGeometry(cubeGroote,cubeGroote,cubeGroote);
-  var worldBoxTexture = new THREE.ImageUtils.loadTexture('img/sky-gay.jpg');
-  var worldBoxMaterial = new THREE.MeshBasicMaterial( { side:THREE.BackSide, map: worldBoxTexture} );
-  var worldBox = new THREE.Mesh(worldBoxGeometry, worldBoxMaterial);
-  scene.add(worldBox);
+  var boxLoader = new THREE.ColladaLoader();
+  boxLoader.load(String('model/boundingBox/boundingBox.dae'), function (result) {
+    boundingBox = result.scene;
+    boundingBox.scale.set(500,500,500);
+    boundingBox.rotation.set(toDegree(-90),toDegree(0),toDegree(0));
+    scene.add(boundingBox);
+  });
 
   // Renderer
   renderer = new THREE.WebGLRenderer( {antialias : true});
   renderer.setClearColor( 0x64A0E1 );
-  renderer.setSize( window.innerWidth*numScreens, window.innerHeight );
+  renderer.setSize( window.innerWidth, window.innerHeight );
 
   // Modellen laden
   for (var m = 0; m < jsonSet.length; m++){
@@ -47,27 +40,6 @@ function init() {
   buildWorld();
 
   window.addEventListener( 'resize', onWindowResize, false );
-
-  // Tween
-  var position = { x : 0, y: 0 };
-  var target = { x : 2000, y: 50 };
-  var tweenVooruit = new TWEEN.Tween(position).to(target, 10000);
-  tweenVooruit.easing(TWEEN.Easing.Circular.Out);
-  tweenVooruit.onUpdate(function(){
-      object[0].position.x = position.x;
-      object[0].position.y = position.y;
-  });
-
-  var tweenAchteruit = new TWEEN.Tween(position).to({ x : 0, y: 0 }, 10000);
-  tweenAchteruit.easing(TWEEN.Easing.Circular.Out);
-  tweenAchteruit.onUpdate(function(){
-      object[0].position.x = position.x;
-      object[0].position.y = position.y;
-  });
-  tweenVooruit.chain(tweenAchteruit);
-  tweenAchteruit.chain(tweenVooruit);
-
-  tweenVooruit.start();
 }
 
 // Create World
@@ -75,6 +47,56 @@ function buildWorld() {
   container.innerHTML = "";
   container.appendChild( renderer.domElement );
 }
+
+  // // createTween wordt aangeroepn door handler, geeft object mee.
+  // function createTween(target) {
+  //   createjs.Tween.get(target)
+  //          .to({
+  //           x: Math.floor(Math.random() * 1000) + 1000,
+  //           y: Math.floor(Math.random() * 2000) + 0,
+  //           z: Math.floor(Math.random() * 1000) + -1000
+  //          }, 5000)
+  //          .call( tweenCompleteHandler( target ));
+  // }
+
+  // // handler runt createTween weer, met object.
+  // function tweenCompleteHandler(target) {
+  //   console.log('hoi');
+  //   createTween( target );
+  // }
+
+  // Tween
+  function tweenin() {
+    for (i = 0; i < object.length; i++) {
+
+      var originelePositie = object[i].position;
+      var tween = new TWEEN.Tween( object[i].position ).to( {
+      x: Math.floor(Math.random() * 1000) + -1000,
+      y: Math.floor(Math.random() * 2000) + 0,
+      z: Math.floor(Math.random() * 1000) + -1000
+      }, 20000 )
+      .easing( TWEEN.Easing.Linear.None);
+      var tween2 = new TWEEN.Tween( object[i].position ).to( {
+      x: Math.floor(Math.random() * 1000) + -1000,
+      y: Math.floor(Math.random() * 2000) + 0,
+      z: Math.floor(Math.random() * 1000) + -1000
+      }, 20000 )
+      .easing( TWEEN.Easing.Linear.None);
+      var tween3 = new TWEEN.Tween( object[i].position ).to( {
+      x: Math.floor(Math.random() * 1000) + -1000,
+      y: Math.floor(Math.random() * 2000) + 0,
+      z: Math.floor(Math.random() * 1000) + -1000
+      }, 20000 )
+      .easing( TWEEN.Easing.Linear.None);
+
+      tween.chain(tween2);
+      tween2.chain(tween3);
+      tween3.chain(tween)
+
+      tween.start();
+
+    }
+  }
 
 var loader = [];
 var object = [];
@@ -118,7 +140,6 @@ function movementBox() {
 function animate() {
   requestAnimationFrame( animate );
   movementBox();
-  // Update tweens
   TWEEN.update();
   render();
 }
