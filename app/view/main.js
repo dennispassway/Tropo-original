@@ -1,6 +1,7 @@
 var container, camera, controls, scene, renderer;
 var clock = new THREE.Clock();
-
+var w = 1432;
+var h = 783;
 // Init en animate worden gerunt wanneer database klaar is.
 
 function init() {
@@ -11,11 +12,13 @@ function init() {
   scene.fog = new THREE.FogExp2( 0xA2BED8, 0.00035 );
 
   // Camera
-  camera = new THREE.PerspectiveCamera( 100, window.innerWidth / window.innerHeight, 1, 10000 );
+  camera = new THREE.PerspectiveCamera( 100, (window.innerWidth) / (window.innerHeight), 1, 10000 );
   camera.position.set(-2000,-2000,0);
+  camera.setViewOffset( w*2, h, w * 0, h * 0, w, h );
 
   // Controls
   controls = new THREE.FirstPersonControls( camera );
+  controls.movementSpeed = 0;
 
   // Bounding Box
   var boxLoader = new THREE.ColladaLoader();
