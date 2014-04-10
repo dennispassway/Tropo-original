@@ -1,7 +1,12 @@
 var container, camera, controls, scene, renderer;
 var clock = new THREE.Clock();
-var w = 1432;
-var h = 783;
+
+// Variabelen voor de verschillende schermgroottes
+var w1 = 1432;
+var h1 = 783;
+var w2 = 1432;
+var h2 = 783;
+
 // Init en animate worden gerunt wanneer database klaar is.
 
 function init() {
@@ -14,7 +19,7 @@ function init() {
   // Camera
   camera = new THREE.PerspectiveCamera( 100, (window.innerWidth) / (window.innerHeight), 1, 10000 );
   camera.position.set(-2000,-2000,0);
-  camera.setViewOffset( w*2, h, w * 1, h * 0, w, h );
+  camera.setViewOffset( w1 + w2, h1, w1, 0, w2, h2 );
 
 
   // Controls
