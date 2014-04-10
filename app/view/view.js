@@ -1,12 +1,6 @@
 var container, camera, controls, scene, renderer;
 var clock = new THREE.Clock();
 
-// Variabelen voor de verschillende schermgroottes
-var w1 = 1432;
-var h1 = 783;
-var w2 = 1432;
-var h2 = 783;
-
 // Init en animate worden gerunt wanneer database klaar is.
 
 function init() {
@@ -19,11 +13,16 @@ function init() {
   // Camera
   camera = new THREE.PerspectiveCamera( 100, window.innerWidth / window.innerHeight, 1, 10000 );
   camera.position.set(-2000,-2000,0);
-  camera.setViewOffset( w1 + w2, h1, 0, 0, w2, h2 );
+
+  // Camera offset
+  // var w1 = 1432;
+  // var h1 = 783;
+  // var w2 = 1432;
+  // var h2 = 783;
+  // camera.setViewOffset( w1 + w2, h1, 0, 0, w1, h1 );
 
   // Controls
   controls = new THREE.FirstPersonControls( camera );
-  controls.movementSpeed = 0;
 
   // Bounding Box
   var boxLoader = new THREE.ColladaLoader();
@@ -56,35 +55,19 @@ function buildWorld() {
 }
 
   // Tween
-  function tweenin() {
+  function floatingTween() {
     for (i = 0; i < object.length; i++) {
-
-      var originelePositie = object[i].position;
-      var tween = new TWEEN.Tween( object[i].position ).to( {
-      x: Math.floor(Math.random() * 1000) + -1000,
-      y: Math.floor(Math.random() * 2000) + 0,
-      z: Math.floor(Math.random() * 1000) + -1000
-      }, 20000 )
-      .easing( TWEEN.Easing.Linear.None);
-      var tween2 = new TWEEN.Tween( object[i].position ).to( {
-      x: Math.floor(Math.random() * 1000) + -1000,
-      y: Math.floor(Math.random() * 2000) + 0,
-      z: Math.floor(Math.random() * 1000) + -1000
-      }, 20000 )
-      .easing( TWEEN.Easing.Linear.None);
-      var tween3 = new TWEEN.Tween( object[i].position ).to( {
-      x: Math.floor(Math.random() * 1000) + -1000,
-      y: Math.floor(Math.random() * 2000) + 0,
-      z: Math.floor(Math.random() * 1000) + -1000
-      }, 20000 )
-      .easing( TWEEN.Easing.Linear.None);
-
-      tween.chain(tween2);
-      tween2.chain(tween3);
-      tween3.chain(tween)
-
+      var tween = new TWEEN.Tween( object[i].position ).to({z: "+400"}, Math.floor((Math.random()*10000)+5000) )
+      .yoyo( true )
+      .easing( TWEEN.Easing.Cubic.InOut);
+      
+      var tweenBack = new TWEEN.Tween( object[i].position ).to({z: "-400"}, Math.floor((Math.random()*10000)+5000) )
+      .yoyo( true )
+      .easing( TWEEN.Easing.Cubic.InOut);
+      
+      tween.chain(tweenBack);
+      tweenBack.chain(tween);
       tween.start();
-
     }
   }
 
@@ -126,10 +109,34 @@ function movementBox() {
   if (camera.position.z > 1000) {camera.position.z = 1000};
 }
 
+// Check Nearness
+function checkDistance() {
+
+  for (i = 0; i < object.length; i++) {
+
+    if (camera.position.x  > object[i].position.x - 200 && camera.position.x < object[i].position.x  + 200) {
+      if (camera.position.y  > object[i].position.y - 200 && camera.position.y < object[i].position.y  + 200) {
+        if (camera.position.z  > object[i].position.z - 200 && camera.position.z < object[i].position.z  + 200) {
+          object[i].rotation.y += 0.05;
+        }
+      }
+    }
+
+  }
+
+}
+
+// Startup function
+function startup() {
+  floatingTween();
+}
+setTimeout(function() { startup() }, 6000);
+
 // Animate
 function animate() {
   requestAnimationFrame( animate );
   movementBox();
+  checkDistance();
   TWEEN.update();
   render();
 }
