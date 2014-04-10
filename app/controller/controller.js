@@ -1,5 +1,5 @@
 // Connect Socket
-var socket = io.connect('http://169.254.209.162:3000');
+var socket = io.connect('http://169.254.217.157:3000');
 
 // Variabelen
 var updateDelay = 100;
