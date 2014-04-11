@@ -1,4 +1,3 @@
-// Set app
 var express = require('express');
 var http = require('http');
 var path = require('path');
@@ -15,6 +14,16 @@ app.get('/', function (req, res) {
   res.sendfile('app/index.html');
 });
 
+// Processing
+var net = require('net');
+var processingMessage = "";
+var processingServer = net.createServer(function (socket) {
+  console.log("processing connected");
+  socket.on("data", function(chunk) {
+    processingMessage = chunk;
+  });
+}).listen(8080);
+
 // Events
 io.sockets.on('connection', function (socket) {
 
@@ -22,6 +31,14 @@ io.sockets.on('connection', function (socket) {
   socket.on('controllerMovement', function (data) {
     socket.broadcast.emit('controllerData', data);
   });
+
+  // Track kinect processingData
+  setInterval(function() {
+    data = processingMessage.toString();
+    if (data) {
+        socket.broadcast.emit('processingData', data);
+    }
+  },100);
 
   // Start Application
   socket.on('startApplicationPressed', function () {
