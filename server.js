@@ -2,12 +2,10 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
-var app = require('express')()
-, server = require('http').createServer(app)
-, io = require('socket.io').listen(server);
+var app = require('express')();
 
-// Poort
-server.listen(3000);
+var server = require('http').createServer(app).listen(3000);
+var io = require('socket.io').listen(server);
 
 // Public folder
 app.use(express.static(path.join(__dirname, 'app')));
