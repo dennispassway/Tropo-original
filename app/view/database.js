@@ -19,7 +19,7 @@ $.getJSON('https://spreadsheets.google.com/feeds/list/0AtGWqQf8eM2OdHVsS2w2QWI5N
 
     // Als forloop klaar is, is database klaar, dus init.
     if (i == data.feed.entry.length-1) {
-      databaseReady = true;
+        databaseReady = true;
     }
     
   }

@@ -6,7 +6,7 @@ var updateDelay = 100;
 var controller = [0,0,0,0,0,0];
 var aplha, beta, gamma, hoogte, kanteling, bocht;
 
-// Socketdata ophalen
+// iPhone data ophalen
 socket.on('controllerData', function (data) {
   controller = data;
 });
