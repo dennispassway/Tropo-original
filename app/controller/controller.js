@@ -33,6 +33,19 @@ window.ondeviceorientation = function(event) {
   gamma = Math.round(event.gamma);
 }
 
+// Gyroscoop op de kop?
+setInterval(function() {
+  if (gamma > -90 && gamma < 90){
+    gamma = gamma;
+  }
+  else {
+    if (gamma < -90) { gamma = -180 - gamma; }
+    if (gamma > 90) { gamma = 180 - gamma; }
+  }
+}, updateDelay);
+
+// Lerpen van alpha beta en gamma voor soepelheid
+
 // Naar Socket sturen
 setInterval(function() {
   var controllerData = [alpha,beta,gamma,arAlpha,arBeta,arGamma];
