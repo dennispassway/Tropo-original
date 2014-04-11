@@ -127,10 +127,16 @@ function checkDistance() {
 }
 
 // Startup function
-function startup() {
-  floatingTween();
+function startApp() {
+  if (databaseReady) {
+    init();
+    animate();
+    floatingTween();
+  }
+  else {
+    setTimeout(function() { startApp() }, 1000);
+  }
 }
-setTimeout(function() { startup() }, 6000);
 
 // Animate
 function animate() {
@@ -146,3 +152,6 @@ function render() {
   controls.update( clock.getDelta() );
   renderer.render( scene, camera );
 }
+
+// Start Applicatie
+setTimeout(function() { startApp() }, 6000);
