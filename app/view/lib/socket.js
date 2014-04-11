@@ -6,9 +6,16 @@ var updateDelay = 100;
 var controller = [0,0,0,0,0,0];
 var aplha, beta, gamma, hoogte, kanteling, bocht;
 
+var processingData, closestX, closestY, closestZ;
+
 // iPhone data ophalen
 socket.on('controllerData', function (data) {
   controller = data;
+});
+
+// Processing socketdata ophalen
+socket.on('processingData', function (data) {
+  processingData = data;
 });
 
 // Verwerk Data
@@ -25,4 +32,15 @@ setInterval(function() {
   hoogte = beta;
   kanteling = gamma;
   // bocht = alpha/3.6;
+
+  // Kinect data
+  if (processingData) {      
+      //Splitten van de data in closest x,y,z
+      var res = processingData.split(",");
+
+      closestX = parseFloat(res[0]);
+      closestY = parseFloat(res[1]);
+      closestZ = parseFloat(res[2]);
+    }
+    
 }, updateDelay);
