@@ -1,7 +1,12 @@
 var container, camera, controls, scene, renderer;
 var clock = new THREE.Clock();
 
-// Init en animate worden gerunt wanneer database klaar is.
+THREE.DefaultLoadingManager.onProgress = function ( item, loaded, total ) {
+  console.log('Loading...');
+  if ( loaded == (jsonSet.length+1) ) { 
+    console.log('Finished Loading.')
+  }
+};
 
 function init() {
   container = document.getElementById( 'container' );
@@ -111,9 +116,7 @@ function movementBox() {
 
 // Check Nearness
 function checkDistance() {
-
   for (i = 0; i < object.length; i++) {
-
     if (camera.position.x  > object[i].position.x - 200 && camera.position.x < object[i].position.x  + 200) {
       if (camera.position.y  > object[i].position.y - 200 && camera.position.y < object[i].position.y  + 200) {
         if (camera.position.z  > object[i].position.z - 200 && camera.position.z < object[i].position.z  + 200) {
@@ -121,20 +124,6 @@ function checkDistance() {
         }
       }
     }
-
-  }
-
-}
-
-// Startup function
-function startApp() {
-  if (databaseReady) {
-    init();
-    animate();
-    floatingTween();
-  }
-  else {
-    setTimeout(function() { startApp() }, 1000);
   }
 }
 
@@ -151,7 +140,27 @@ function animate() {
 function render() {
   controls.update( clock.getDelta() );
   renderer.render( scene, camera );
-}
+} 
 
-// Start Applicatie
-setTimeout(function() { startApp() }, 6000);
+// Loadd Application
+function loadApp() {
+  if (databaseReady) {
+    init();
+  }
+  else {
+    setTimeout(function() {
+      loadApp();
+    }, 1000);
+  }
+}
+loadApp();
+
+socket.on('startApp', function() {
+  startApp();
+})
+
+// Start Application
+function startApp() {
+  animate();
+  floatingTween();
+}

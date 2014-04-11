@@ -18,8 +18,15 @@ app.get('/', function (req, res) {
 // Events
 io.sockets.on('connection', function (socket) {
 
+  // Track controller movement
   socket.on('controllerMovement', function (data) {
     socket.broadcast.emit('controllerData', data);
+  });
+
+  // Start Application
+  socket.on('startApplicationPressed', function () {
+    console.log('Start Tropo!');
+    socket.broadcast.emit('startApp');
   });
 
 });
