@@ -49,6 +49,7 @@ function init() {
   }
 
   buildWorld();
+  initKinect();
 
   window.addEventListener( 'resize', onWindowResize, false );
 }
@@ -133,6 +134,7 @@ function animate() {
   movementBox();
   checkDistance();
   TWEEN.update();
+  processingVerwerks();
   render();
 }
 
