@@ -1,5 +1,5 @@
 // Connect Socket
-var socket = io.connect('http://169.254.136.127:3000');
+var socket = io.connect('http://192.168.124.147:3000');
 
 // Variabelen
 var updateDelay = 100;
@@ -28,9 +28,9 @@ var alpha = 1;
 var beta = 1;
 var gamma = 1;
 window.ondeviceorientation = function(event) {
-  alpha = Math.round(event.alpha);
-  beta = Math.round(event.beta);
-  gamma = Math.round(event.gamma);
+  alpha = event.alpha;
+  beta = event.beta;
+  gamma = event.gamma;
 }
 
 // Lerp variabelen
@@ -39,11 +39,11 @@ var alphaLast = 0;
 var betaLast = 0;
 var gammaLast = 0;
 
-// Lerpfunctie van alpha, beta en gamma voor soepelheid
+  // Lerpfunctie van alpha, beta en gamma voor soepelheid
 function lerp(a, b, t) {
-    var result;
-    result = (a + t * (b - a) );
-    return Math.round(result);
+    var result = (a + ( t * (b - a) ) );
+    result = Math.round(result);
+    return result;
 }
 
 // Gyroscoop op de kop?
@@ -56,7 +56,10 @@ setInterval(function() {
     if (gamma > 90) { gamma = 180 - gamma; }
   }
 
+}, updateDelay);
+
   // Lerpen
+setInterval(function() {
   alphaNew = alpha;
   alpha = lerp(alphaNew, alphaLast, 0.5);
   alphaLast = alpha;
@@ -68,7 +71,6 @@ setInterval(function() {
   gammaNew = gamma;
   gamma = lerp(gammaNew, gammaLast, 0.5);
   gammaLast = gamma;
-
 }, updateDelay);
 
 // Naar Socket sturen
