@@ -16,15 +16,29 @@ function init() {
   // scene.fog = new THREE.FogExp2( 0xA2BED8, 0.00035 );
 
   // Camera
-  camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+  camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 15000 );
   camera.position.set(-2000,-2000,0);
 
   // Camera offset
-  // var w1 = 1432;
-  // var h1 = 783;
-  // var w2 = 1432;
-  // var h2 = 783;
-  // camera.setViewOffset( w1 + w2, h1, 0, 0, w1, h1 );
+  var numberURL = (getUrlVars('view'));
+  var viewNumber = (numberURL.view);
+
+  function cameraOffset(number) {
+    var w1 = 1432;
+    var h1 = 783;
+    var w2 = 1432;
+    var h2 = 783;
+    if (number == 1) {
+      camera.setViewOffset( w1 + w2, h1, 0, 0, w1, h1 );
+    }
+    else if (number == 2) {
+      camera.setViewOffset( w1 + w2, h1, w1, 0, w2, h2 );
+    }
+  }
+
+  if (viewNumber) {
+    cameraOffset(viewNumber);
+  }
 
   // Controls
   controls = new THREE.FirstPersonControls( camera );
@@ -33,7 +47,7 @@ function init() {
   var boxLoader = new THREE.ColladaLoader();
   boxLoader.load(String('model/boundingBox/boundingBox.dae'), function (result) {
     boundingBox = result.scene;
-    boundingBox.scale.set(500,500,500);
+    boundingBox.scale.set(800,800,800);
     boundingBox.rotation.set(toDegree(-90),toDegree(0),toDegree(0));
     scene.add(boundingBox);
   });
@@ -64,13 +78,9 @@ function buildWorld() {
   function floatingTween() {
     for (i = 0; i < object.length; i++) {
       var tween = new TWEEN.Tween( object[i].position ).to({z: "+400"}, Math.floor((Math.random()*10000)+5000) )
-      .yoyo( true )
       .easing( TWEEN.Easing.Cubic.InOut);
-      
       var tweenBack = new TWEEN.Tween( object[i].position ).to({z: "-400"}, Math.floor((Math.random()*10000)+5000) )
-      .yoyo( true )
       .easing( TWEEN.Easing.Cubic.InOut);
-      
       tween.chain(tweenBack);
       tweenBack.chain(tween);
       tween.start();
@@ -108,19 +118,19 @@ function onWindowResize() {
 // Box to limit maximum movement
 function movementBox() {
   if (camera.position.y < 0) { camera.position.y = 0; }
-  if (camera.position.y > 2000) { camera.position.y = 2000; }
-  if (camera.position.x < -1000) {camera.position.x = -1000};
-  if (camera.position.x > 1000) {camera.position.x = 1000};
-  if (camera.position.z < -1000) {camera.position.z = -1000};
-  if (camera.position.z > 1000) {camera.position.z = 1000};
+  if (camera.position.y > 8000) { camera.position.y = 8000; }
+  if (camera.position.x < -4000) {camera.position.x = -4000};
+  if (camera.position.x > 4000) {camera.position.x = 4000};
+  if (camera.position.z < -4000) {camera.position.z = -4000};
+  if (camera.position.z > 4000) {camera.position.z = 4000};
 }
 
 // Check Nearness
 function checkDistance() {
   for (i = 0; i < object.length; i++) {
-    if (camera.position.x  > object[i].position.x - 200 && camera.position.x < object[i].position.x  + 200) {
-      if (camera.position.y  > object[i].position.y - 200 && camera.position.y < object[i].position.y  + 200) {
-        if (camera.position.z  > object[i].position.z - 200 && camera.position.z < object[i].position.z  + 200) {
+    if (camera.position.x  > object[i].position.x - 400 && camera.position.x < object[i].position.x  + 400) {
+      if (camera.position.y  > object[i].position.y - 400 && camera.position.y < object[i].position.y  + 400) {
+        if (camera.position.z  > object[i].position.z - 400 && camera.position.z < object[i].position.z  + 400) {
           object[i].rotation.y += 0.01;
         }
       }
@@ -144,7 +154,7 @@ function render() {
   renderer.render( scene, camera );
 } 
 
-// Loadd Application
+// Load Application
 function loadApp() {
   if (databaseReady) {
     init();
@@ -165,4 +175,13 @@ socket.on('startApp', function() {
 function startApp() {
   animate();
   floatingTween();
+}
+
+// Get URL variablen
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
 }
