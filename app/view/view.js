@@ -89,11 +89,21 @@ function buildWorld() {
 
 var loader = [];
 var object = [];
+var objectGeometry = [];
   // Collada Models
   function modellenLaden(m) {
     loader[m] = new THREE.ColladaLoader();
     loader[m].load(String('model/' + jsonSet[m].model + '.dae'), function (result) {
       object[m] = result.scene;
+
+      var objectGeometry = object[m].children[0].geometry;
+      objectGeometry.applyMatrix();
+      
+      //Pivot point
+      objectGeometry.push(object[m].children[0].geometry);
+
+      //.applyMatrix(new THREE.Matrix4().makeTranslation (-269, 0, -5));
+
       object[m].position.set(jsonSet[m].x, jsonSet[m].z, jsonSet[m].y);
       object[m].scale.set(jsonSet[m].scale, jsonSet[m].scale, jsonSet[m].scale);
       object[m].rotation.set(toDegree(jsonSet[m].rotationX),toDegree(jsonSet[m].rotationY),toDegree(jsonSet[m].rotationZ));
