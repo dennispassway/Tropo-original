@@ -13,10 +13,10 @@ function init() {
 
   // Scene
   scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2( 0xA2BED8, 0.00035 );
+  // scene.fog = new THREE.FogExp2( 0xA2BED8, 0.00035 );
 
   // Camera
-  camera = new THREE.PerspectiveCamera( 100, window.innerWidth / window.innerHeight, 1, 10000 );
+  camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
   camera.position.set(-2000,-2000,0);
 
   // Camera offset
@@ -121,7 +121,7 @@ function checkDistance() {
     if (camera.position.x  > object[i].position.x - 200 && camera.position.x < object[i].position.x  + 200) {
       if (camera.position.y  > object[i].position.y - 200 && camera.position.y < object[i].position.y  + 200) {
         if (camera.position.z  > object[i].position.z - 200 && camera.position.z < object[i].position.z  + 200) {
-          object[i].rotation.y += 0.05;
+          object[i].rotation.y += 0.01;
         }
       }
     }
