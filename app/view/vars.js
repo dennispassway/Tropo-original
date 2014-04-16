@@ -1,4 +1,4 @@
-var fogAfstand = 0.00030;
+var fogAfstand = 0.00022;
 
 var fov = 40;
 var near = 1;
@@ -14,7 +14,7 @@ var boundingBoxScale = 800;
 var floatingTweenAfstand = 400;
 
 var afstandAnimatie = 500;
-var rotatieSnelheidAnimatie = 1; //0.01
+var rotatieSnelheidAnimatie = 0.02;
 
 var ControllerMovementSpeed = 100;
 var ControllerLookSpeed = 0.5;
