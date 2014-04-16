@@ -1,16 +1,17 @@
 var box;
 
 function initKinect() {
-  // Kinect sphere test
-  var boxGeometry = new THREE.CubeGeometry(500,500,500);
-  var boxMaterial = new THREE.MeshBasicMaterial( { color: 0xFFFF00} );
-  box = new THREE.Mesh( boxGeometry, boxMaterial );
-  // scene.add(box);
+  loader = new THREE.ColladaLoader();
+    loader.load(String('model/bij.dae'), function (result) {
+      bij = result.scene;
+      bij.scale.set(400,400,400);
+      scene.add(bij);
+    });
 }
 
 // Processingfunctie
 function processingVerwerks() {
   if(processingData) {
-    box.position.set(closestX, closestY, closestZ);
+    bij.position.set(closestX, closestY, closestZ);
   }
 }
