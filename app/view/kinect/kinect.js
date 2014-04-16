@@ -1,17 +1,16 @@
 var box;
 
 function initKinect() {
-  loader = new THREE.ColladaLoader();
-    loader.load(String('model/bij.dae'), function (result) {
-      bij = result.scene;
-      bij.scale.set(400,400,400);
-      scene.add(bij);
-    });
+  var boxGeo = new THREE.CubeGeometry( 500,500,500 );
+  var boxMaterial = new THREE.MeshBasicMaterial( {color: 0xff0000} );
+  var box = new THREE.Mesh(boxGeo, boxMaterial);
+  scene.add(box);
+  box.position.set(2000,2000,0);
 }
 
 // Processingfunctie
 function processingVerwerks() {
   if(processingData) {
-    bij.position.set(closestX, closestY, closestZ);
+    box.position.set(closestX, closestY, closestZ);
   }
 }
