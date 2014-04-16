@@ -2,7 +2,7 @@ var container, camera, controls, scene, renderer;
 var clock = new THREE.Clock();
 
 THREE.DefaultLoadingManager.onProgress = function ( item, loaded, total ) {
-  console.log('Loading...');
+  console.log('Loading: "' + item + '"');
   if ( loaded == (jsonSet.length+1) ) { 
     console.log('Finished Loading.')
   }
@@ -13,26 +13,22 @@ function init() {
 
   // Scene
   scene = new THREE.Scene();
-  // scene.fog = new THREE.FogExp2( 0xA2BED8, 0.00035 );
+  scene.fog = new THREE.FogExp2( 0xA2BED8, fogAfstand );
 
   // Camera
-  camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 15000 );
-  camera.position.set(-2000,-2000,0);
+  camera = new THREE.PerspectiveCamera( fov, window.innerWidth / window.innerHeight, near, far );
+  camera.position.set(-4000,-4000,0);
 
   // Camera offset
   var numberURL = (getUrlVars('view'));
   var viewNumber = (numberURL.view);
 
   function cameraOffset(number) {
-    var w1 = 1432;
-    var h1 = 783;
-    var w2 = 1432;
-    var h2 = 783;
     if (number == 1) {
-      camera.setViewOffset( w1 + w2, h1, 0, 0, w1, h1 );
+      camera.setViewOffset( widthScreen1 + widthScreen2, heightScreen1, 0, 0, widthScreen1, heightScreen1 );
     }
     else if (number == 2) {
-      camera.setViewOffset( w1 + w2, h1, w1, 0, w2, h2 );
+      camera.setViewOffset( widthScreen1 + widthScreen2, heightScreen1, widthScreen1, 0, widthScreen2, heightScreen2 );
     }
   }
 
@@ -47,7 +43,7 @@ function init() {
   var boxLoader = new THREE.ColladaLoader();
   boxLoader.load(String('model/boundingBox/boundingBox.dae'), function (result) {
     boundingBox = result.scene;
-    boundingBox.scale.set(800,800,800);
+    boundingBox.scale.set(boundingBoxScale,boundingBoxScale,boundingBoxScale);
     boundingBox.rotation.set(toDegree(-90),toDegree(0),toDegree(0));
     scene.add(boundingBox);
   });
@@ -77,9 +73,9 @@ function buildWorld() {
   // Tween
   function floatingTween() {
     for (i = 0; i < object.length; i++) {
-      var tween = new TWEEN.Tween( object[i].position ).to({z: "+400"}, Math.floor((Math.random()*10000)+5000) )
+      var tween = new TWEEN.Tween( object[i].position ).to({z: "+" + floatingTweenAfstand}, floatinTweenSnelheid)
       .easing( TWEEN.Easing.Cubic.InOut);
-      var tweenBack = new TWEEN.Tween( object[i].position ).to({z: "-400"}, Math.floor((Math.random()*10000)+5000) )
+      var tweenBack = new TWEEN.Tween( object[i].position ).to({z: "-" + floatingTweenAfstand}, floatinTweenSnelheid)
       .easing( TWEEN.Easing.Cubic.InOut);
       tween.chain(tweenBack);
       tweenBack.chain(tween);
@@ -118,7 +114,7 @@ function onWindowResize() {
 // Box to limit maximum movement
 function movementBox() {
   if (camera.position.y < 0) { camera.position.y = 0; }
-  if (camera.position.y > 8000) { camera.position.y = 8000; }
+  if (camera.position.y > 5000) { camera.position.y = 5000; }
   if (camera.position.x < -4000) {camera.position.x = -4000};
   if (camera.position.x > 4000) {camera.position.x = 4000};
   if (camera.position.z < -4000) {camera.position.z = -4000};
@@ -128,10 +124,10 @@ function movementBox() {
 // Check Nearness
 function checkDistance() {
   for (i = 0; i < object.length; i++) {
-    if (camera.position.x  > object[i].position.x - 400 && camera.position.x < object[i].position.x  + 400) {
-      if (camera.position.y  > object[i].position.y - 400 && camera.position.y < object[i].position.y  + 400) {
-        if (camera.position.z  > object[i].position.z - 400 && camera.position.z < object[i].position.z  + 400) {
-          object[i].rotation.y += 0.01;
+    if (camera.position.x  > object[i].position.x - afstandAnimatie && camera.position.x < object[i].position.x  + afstandAnimatie) {
+      if (camera.position.y  > object[i].position.y - afstandAnimatie && camera.position.y < object[i].position.y  + afstandAnimatie) {
+        if (camera.position.z  > object[i].position.z - afstandAnimatie && camera.position.z < object[i].position.z  + afstandAnimatie) {
+          object[i].rotation.y += rotatieSnelheidAnimatie;
         }
       }
     }

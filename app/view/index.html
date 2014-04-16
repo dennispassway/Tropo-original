@@ -6,7 +6,7 @@
   <meta name="description" content="SUPERTROPO!">
   <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
   <script src="/socket.io/socket.io.js"></script>
-  <script src="lib/socket.js"></script>
+  <script src="socket/socket.js"></script>
 </head>
 <body style="margin: 0; padding: 0; text-align: center;">
 
@@ -21,14 +21,19 @@
   <script src="lib/collada.js"></script>
   <script src="lib/tween.js"></script>
 
-  <!-- Welke Controls? -->
-  <!-- <script src="lib/controllercontrols.js"></script> -->
-  <script src="lib/mousecontrols.js"></script>
+  <!-- Variables -->
+  <script src="vars.js"></script>
 
-  <!-- Own Scripts -->
+  <!-- Controls -->
+  <script src="controls/controllercontrols.js"></script>
+  <!-- <script src="controls/mousecontrols.js"></script> -->
+
+  <!-- Dependables -->
   <script src="database.js"></script>
-  <script src="view.js"></script>
   <script src="kinect/kinect.js"></script>
+
+  <!-- View -->
+  <script src="view.js"></script>
 
 </body>
 </html>
