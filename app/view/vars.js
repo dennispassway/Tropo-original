@@ -1,4 +1,6 @@
-var fogAfstand = 0.00022;
+var startFogAfstand = landWaarde;
+var landWaarde = 0.002;
+var vliegWaarde = 0.00022;
 
 var fov = 40;
 var near = 1;

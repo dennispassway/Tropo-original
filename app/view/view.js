@@ -13,11 +13,11 @@ function init() {
 
   // Scene
   scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2( 0xA2BED8, fogAfstand );
+  scene.fog = new THREE.FogExp2( 0xA2BED8, startFogAfstand );
 
   // Camera
   camera = new THREE.PerspectiveCamera( fov, window.innerWidth / window.innerHeight, near, far );
-  camera.position.set(0,2500,0);
+  camera.position.set(-1000,0,0);
 
   // Camera offset
   var numberURL = (getUrlVars('view'));
@@ -180,4 +180,28 @@ function getUrlVars() {
         vars[key] = value;
     });
     return vars;
+}
+
+// Opstijg functie
+function opstijgen() {
+  var intervaller = setInterval(function() {
+    if (scene.fog.density > vliegWaarde){
+      scene.fog.density -= 0.000089;
+    }
+    else {
+      clearInterval(intervaller);
+    }
+  }, 100);
+}
+
+// Landfunctie
+function landen() {
+  var intervaller = setInterval(function() {
+    if (scene.fog.density < landWaarde){
+      scene.fog.density += 0.000089;
+    }
+    else {
+      clearInterval(intervaller);
+    }
+  }, 100);
 }
