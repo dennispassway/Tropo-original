@@ -17,7 +17,7 @@ function init() {
 
   // Camera
   camera = new THREE.PerspectiveCamera( fov, window.innerWidth / window.innerHeight, near, far );
-  camera.position.set(-4000,-4000,0);
+  camera.position.set(0,2500,0);
 
   // Camera offset
   var numberURL = (getUrlVars('view'));
@@ -73,9 +73,9 @@ function buildWorld() {
   // Tween
   function floatingTween() {
     for (i = 0; i < object.length; i++) {
-      var tween = new TWEEN.Tween( object[i].position ).to({z: "+" + floatingTweenAfstand}, floatinTweenSnelheid)
+      var tween = new TWEEN.Tween( object[i].position ).to({z: "+" + floatingTweenAfstand}, jsonSet[i].beweegSnelheid)
       .easing( TWEEN.Easing.Cubic.InOut);
-      var tweenBack = new TWEEN.Tween( object[i].position ).to({z: "-" + floatingTweenAfstand}, floatinTweenSnelheid)
+      var tweenBack = new TWEEN.Tween( object[i].position ).to({z: "-" + floatingTweenAfstand}, jsonSet[i].beweegSnelheid)
       .easing( TWEEN.Easing.Cubic.InOut);
       tween.chain(tweenBack);
       tweenBack.chain(tween);
@@ -96,7 +96,7 @@ var object = [];
       scene.add(object[m]);
     });
   }
-
+  
 // Radians to degree
 function toDegree(degree) {
   radian = degree/57.2957795;
