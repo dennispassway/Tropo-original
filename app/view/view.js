@@ -165,7 +165,7 @@ loadApp();
 
 socket.on('startApp', function() {
   startApp();
-})
+});
 
 // Start Application
 function startApp() {

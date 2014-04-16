@@ -12,7 +12,9 @@
 
   <div id="container">
     <button onclick="startAppButton()">Start Tropo</button>
+    <button onclick="stopAppButton()">Stop Tropo</button>
   </div>
+  <div id="state"></div>
 
   <script>
     // Connect Socket
@@ -20,8 +22,13 @@
 
     function startAppButton() {
       socket.emit('startApplicationPressed');
-      document.getElementById('container').innerHTML = '';
-      document.getElementById('container').appendChild(document.createTextNode('Tropo is started. Enjoy!'));
+      document.getElementById('state').innerHTML = "";
+      document.getElementById('state').appendChild(document.createTextNode('Tropo is started. Enjoy!'));
+    }
+    function stopAppButton() {
+      socket.emit('stopApplicationPressed');
+      document.getElementById('state').innerHTML = "";
+      document.getElementById('state').appendChild(document.createTextNode('Tropo is Stopped. Start it again!'));
     }
   </script>
 

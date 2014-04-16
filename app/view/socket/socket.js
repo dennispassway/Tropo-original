@@ -18,6 +18,11 @@ socket.on('processingData', function (data) {
   processingData = data;
 });
 
+// Reset knop processing
+socket.on('stopApp', function () {
+  location.reload();
+});
+
 // Verwerk Data
 setInterval(function() {
   // Gyroscoop

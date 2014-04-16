@@ -38,9 +38,16 @@ io.sockets.on('connection', function (socket) {
         socket.broadcast.emit('processingData', data);
     }
   },100);
+  
   // Start Application
   socket.on('startApplicationPressed', function () {
     console.log('Start Tropo!');
     socket.broadcast.emit('startApp');
+  });
+
+  // Stop Application
+  socket.on('stopApplicationPressed', function () {
+    console.log('Stop Tropo!');
+    socket.broadcast.emit('stopApp');
   });
 });
