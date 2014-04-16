@@ -26,7 +26,6 @@ var processingServer = net.createServer(function (socket) {
 
 // Events
 io.sockets.on('connection', function (socket) {
-
   // Track controller movement
   socket.on('controllerMovement', function (data) {
     socket.broadcast.emit('controllerData', data);
@@ -39,11 +38,9 @@ io.sockets.on('connection', function (socket) {
         socket.broadcast.emit('processingData', data);
     }
   },100);
-
   // Start Application
   socket.on('startApplicationPressed', function () {
     console.log('Start Tropo!');
     socket.broadcast.emit('startApp');
   });
-
 });
