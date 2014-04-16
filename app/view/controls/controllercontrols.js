@@ -4,9 +4,9 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 
   this.domElement = ( domElement !== undefined ) ? domElement : document;
 
-  this.movementSpeed = 100;
-  this.lookSpeed = 0.5;
-  this.autoForward = true;
+  this.movementSpeed = ControllerMovementSpeed;
+  this.lookSpeed = ControllerLookSpeed;
+  this.autoForward = ControllerForward;
 
   this.lookVertical = true;
   this.invertVertical = false;

@@ -11,11 +11,11 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 
   this.domElement = ( domElement !== undefined ) ? domElement : document;
 
-  this.movementSpeed = 500;
-  this.lookSpeed = 0.1;
+  this.movementSpeed = MouseMovementSpeed;
+  this.lookSpeed = MouseLookSpeed;
+  this.autoForward = MouseForward;
 
   this.lookVertical = true;
-  this.autoForward = false;
   this.invertVertical = false;
 
   this.activeLook = true;
