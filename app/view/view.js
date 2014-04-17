@@ -200,9 +200,12 @@ function opstijgenLandenCheck() {
         }
       }
     }
+    if (controllerMoves == true && vliegend == true ) {
+      secondenStil = 0;
+    }
     if(controllerMoves == false && vliegend == true) {
       secondenStil++;
-      if (secondenStil == 5) {
+      if (secondenStil > 5) {
         if (controllerMoves == false && vliegend == true) {
           landen();
           secondenStil = 0;
