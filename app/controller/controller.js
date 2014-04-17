@@ -18,9 +18,9 @@ window.ondevicemotion = function(event) {
     arBeta = Math.round(rotation.beta);
     arGamma = Math.round(rotation.gamma);
   }*/
-  arAlpha = Math.round(ax);
-  arBeta = Math.round(ay);
-  arGamma = Math.round(az);
+  arAlpha = ax;
+  arBeta = ay;
+  arGamma = az;
 }
 
 // Gyroscope
