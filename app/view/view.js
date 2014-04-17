@@ -171,6 +171,7 @@ socket.on('startApp', function() {
 function startApp() {
   animate();
   floatingTween();
+  opstijgenLandenCheck();
 }
 
 // Get URL variablen
@@ -182,26 +183,55 @@ function getUrlVars() {
     return vars;
 }
 
-// Opstijg functie
+// Opstijgen en landen
+function opstijgenLandenCheck() {
+  var vliegend = false;
+  var secondenBeweegs = 0;
+  var secondenStil = 0;
+
+  setInterval(function() {
+    if (controllerMoves == true && vliegend == false ) {
+      secondenBeweegs++;
+      if (secondenBeweegs > 1) {
+        if (controllerMoves == true && vliegend == false ) {
+          opstijgen();
+          controls.movementspeed = ControllerMovementSpeed;
+          controls.lookspeed = ControllerLookSpeed;
+          secondenBeweegs = 0;
+          vliegend = true;
+        }
+      }
+    }
+    if(controllerMoves == false && vliegend == true) {
+      secondenStil++;
+      if (secondenStil == 5) {
+        if (controllerMoves == false && vliegend == true) {
+          landen();
+          controls.movementspeed = 0;
+          controls.lookspeed = 0;
+          secondenStil = 0;
+          vliegend = false;
+          }
+      }
+    }
+    // Debuglines
+    // console.log('vlieg: ' + vliegend);
+    // console.log('moves: ' + controllerMoves);
+    // console.log('seconden beweegs: ' + secondenBeweegs);
+    // console.log('seconden stil: ' + secondenStil);
+  }, 1000);
+}
+
 function opstijgen() {
   var intervaller = setInterval(function() {
-    if (scene.fog.density > vliegWaarde){
-      scene.fog.density -= 0.000089;
-    }
-    else {
-      clearInterval(intervaller);
-    }
+    if (scene.fog.density > vliegWaarde){ scene.fog.density -= 0.000089; }
+    else { clearInterval(intervaller); }
   }, 100);
 }
 
-// Landfunctie
 function landen() {
   var intervaller = setInterval(function() {
-    if (scene.fog.density < landWaarde){
-      scene.fog.density += 0.000089;
-    }
-    else {
-      clearInterval(intervaller);
-    }
+    if (scene.fog.density < landWaarde){ scene.fog.density += 0.000089; }
+    else { clearInterval(intervaller); }
   }, 100);
 }

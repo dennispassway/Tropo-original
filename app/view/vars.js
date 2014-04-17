@@ -1,5 +1,5 @@
 var startFogAfstand = landWaarde;
-var landWaarde = 0.002;
+var landWaarde = 0.0018;
 var vliegWaarde = 0.00022;
 
 var fov = 40;
@@ -25,3 +25,5 @@ var ControllerForward = true;
 var MouseMovementSpeed = 1000;
 var MouseLookSpeed = 0.1;
 var MouseForward = false;
+
+var controllerMoves = false;

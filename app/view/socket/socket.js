@@ -38,6 +38,14 @@ setInterval(function() {
   kanteling = gamma;
   // bocht = alpha/3.6;
 
+  // Accelerometer
+  if (arGamma > 0.035 || arGamma < -0.035) {
+    controllerMoves = true;
+  }
+  else {
+    controllerMoves = false;
+  }
+
   // Kinect data
   if (processingData) {      
       //Splitten van de data in closest x,y,z
