@@ -19,7 +19,7 @@ var floatingTweenAfstand = 400;
 var afstandAnimatie = 500;
 var rotatieSnelheidAnimatie = 0.02;
 
-var ControllerMovementSpeed = 100;
+var ControllerMovementSpeed = 150;
 var ControllerLookSpeed = 0.5;
 var ControllerForward = true;
 
