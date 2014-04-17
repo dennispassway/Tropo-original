@@ -40,7 +40,9 @@ setInterval(function() {
 
   // Accelerometer
   if (arGamma > 0.035 || arGamma < -0.035) {
-    controllerMoves = true;
+    if (arBeta > 0.030 || arBeta < -0.030) {
+      controllerMoves = true;
+    }
   }
   else {
     controllerMoves = false;

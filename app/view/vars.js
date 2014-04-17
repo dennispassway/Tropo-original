@@ -1,6 +1,7 @@
-var startFogAfstand = landWaarde;
-var landWaarde = 0.0018;
-var vliegWaarde = 0.00022;
+var startFogAfstand = vliegWaarde;
+var landWaarde = 0.00130;
+var vliegWaarde = 0.00025;
+var densityStijging = 0.000105;
 
 var fov = 40;
 var near = 1;

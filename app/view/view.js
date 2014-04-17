@@ -195,8 +195,6 @@ function opstijgenLandenCheck() {
       if (secondenBeweegs > 1) {
         if (controllerMoves == true && vliegend == false ) {
           opstijgen();
-          controls.movementspeed = ControllerMovementSpeed;
-          controls.lookspeed = ControllerLookSpeed;
           secondenBeweegs = 0;
           vliegend = true;
         }
@@ -207,8 +205,6 @@ function opstijgenLandenCheck() {
       if (secondenStil == 5) {
         if (controllerMoves == false && vliegend == true) {
           landen();
-          controls.movementspeed = 0;
-          controls.lookspeed = 0;
           secondenStil = 0;
           vliegend = false;
           }
@@ -224,14 +220,14 @@ function opstijgenLandenCheck() {
 
 function opstijgen() {
   var intervaller = setInterval(function() {
-    if (scene.fog.density > vliegWaarde){ scene.fog.density -= 0.000089; }
+    if (scene.fog.density > vliegWaarde){ scene.fog.density -= densityStijging; }
     else { clearInterval(intervaller); }
   }, 100);
 }
 
 function landen() {
   var intervaller = setInterval(function() {
-    if (scene.fog.density < landWaarde){ scene.fog.density += 0.000089; }
+    if (scene.fog.density < landWaarde){ scene.fog.density += densityStijging; }
     else { clearInterval(intervaller); }
   }, 100);
 }
