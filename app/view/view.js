@@ -2,7 +2,7 @@ var container, camera, controls, scene, renderer;
 var clock = new THREE.Clock();
 
 THREE.DefaultLoadingManager.onProgress = function ( item, loaded, total ) {
-  console.log('Loading: "' + item + '"');
+  // console.log(loaded + "/" + total + ". Total lengte is: " + jsonSet.length);
   if ( loaded == (jsonSet.length+1) ) { 
     console.log('Finished Loading.')
   }
@@ -44,7 +44,7 @@ function init() {
   boxLoader.load(String('model/boundingBox/boundingBox.dae'), function (result) {
     boundingBox = result.scene;
     boundingBox.scale.set(boundingBoxScale,boundingBoxScale,boundingBoxScale);
-    boundingBox.rotation.set(toDegree(-90),toDegree(0),toDegree(0));
+    boundingBox.rotation.set(toRadian(-90),toRadian(0),toRadian(0));
     scene.add(boundingBox);
   });
 
@@ -92,13 +92,13 @@ var object = [];
       object[m] = result.scene;
       object[m].position.set(jsonSet[m].x, jsonSet[m].z, jsonSet[m].y);
       object[m].scale.set(jsonSet[m].scale, jsonSet[m].scale, jsonSet[m].scale);
-      object[m].rotation.set(toDegree(jsonSet[m].rotationX),toDegree(jsonSet[m].rotationY),toDegree(jsonSet[m].rotationZ));
+      object[m].rotation.set(toRadian(jsonSet[m].rotationX),toRadian(jsonSet[m].rotationY),toRadian(jsonSet[m].rotationZ));
       scene.add(object[m]);
     });
   }
   
 // Radians to degree
-function toDegree(degree) {
+function toRadian(degree) {
   radian = degree/57.2957795;
   return radian;
 }
