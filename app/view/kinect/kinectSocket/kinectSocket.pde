@@ -18,13 +18,17 @@ int previousY;
 void setup() { 
   size(50, 50);
 //  c = new Client(this, "localhost", 8080);
-  c = new Client(this, "192.168.124.147", 8080);
+  c = new Client(this, "192.168.124.139", 8080);
   
   kinect = new SimpleOpenNI(this);
   kinect.enableDepth();
   
   // Kinect beeld omdraaien
   kinect.setMirror(true);
+  
+  
+  //Framerate 10, maar 10 keer per seconde sturen!
+  frameRate(10);
 } 
 
 void draw() {
