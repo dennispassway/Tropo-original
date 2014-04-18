@@ -9,23 +9,24 @@ var io = require('socket.io').listen(server);
 // Public folder
 app.use(express.static(path.join(__dirname, 'app')));
 
-// Server Dinges
+// Serveren index.html bij http request
 app.get('/', function (req, res) {
   res.sendfile('app/index.html');
 });
 
 // Processing
-var net = require('net');
 var processingMessage = "";
+var net = require('net');
 var processingServer = net.createServer(function (socket) {
-  console.log("processing connected");
+  console.log("Processing is connected to the socket.");
   socket.on("data", function(chunk) {
     processingMessage = chunk;
   });
 }).listen(8080);
 
-// Events
+// Socket events
 io.sockets.on('connection', function (socket) {
+
   // Track controller movement
   socket.on('controllerMovement', function (data) {
     socket.broadcast.emit('controllerData', data);
@@ -50,4 +51,5 @@ io.sockets.on('connection', function (socket) {
     console.log('Stop Tropo!');
     socket.broadcast.emit('stopApp');
   });
+  
 });

@@ -1,18 +1,13 @@
 <!doctype html>
 <html>
 <head>
-  <title>SuperController</title>
+  <title>Tropo controller</title>
   <meta name="viewport" content="width=device-width,height=device-height, user-scalable=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
 </head>
 <body>
 <script>
-if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-  window.location.replace("controller/");
-}
-else {
-  window.location.replace("view/");
-}
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) { window.location.replace("controller/"); }
+else { window.location.replace("view/"); }
 </script>
 </body>
 </html>

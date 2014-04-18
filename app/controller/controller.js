@@ -13,14 +13,14 @@ window.ondevicemotion = function(event) {
   ay = event.acceleration.y
   az = event.acceleration.z
   rotation = event.rotationRate;
-  /*if (rotation != null) {
+  arAlpha = ax;
+  arBeta = ay;
+  arGamma = az;
+    /*if (rotation != null) {
     arAlpha = Math.round(rotation.alpha);
     arBeta = Math.round(rotation.beta);
     arGamma = Math.round(rotation.gamma);
   }*/
-  arAlpha = ax;
-  arBeta = ay;
-  arGamma = az;
 }
 
 // Gyroscope
@@ -38,15 +38,14 @@ var alphaNew, betaNew, gammaNew;
 var alphaLast = 0;
 var betaLast = 0;
 var gammaLast = 0;
-
-  // Lerpfunctie van alpha, beta en gamma voor soepelheid
+// Lerpfunctie van alpha, beta en gamma voor soepelheid
 function lerp(a, b, t) {
     var result = (a + ( t * (b - a) ) );
     result = Math.round(result);
     return result;
 }
 
-// Gyroscoop op de kop?
+// Gyroscoop op de kop check
 setInterval(function() {
   if (gamma > -90 && gamma < 90){
     gamma = gamma;
@@ -55,7 +54,6 @@ setInterval(function() {
     if (gamma < -90) { gamma = -180 - gamma; }
     if (gamma > 90) { gamma = 180 - gamma; }
   }
-
 }, updateDelay);
 
   // Lerpen

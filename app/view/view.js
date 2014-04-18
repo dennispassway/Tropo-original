@@ -22,7 +22,9 @@ function init() {
   // Camera offset
   var numberURL = (getUrlVars('view'));
   var viewNumber = (numberURL.view);
-
+  if (viewNumber) {
+    cameraOffset(viewNumber);
+  }
   function cameraOffset(number) {
     if (number == 1) {
       camera.setViewOffset( widthScreen1 + widthScreen2, heightScreen1, 0, 0, widthScreen1, heightScreen1 );
@@ -32,12 +34,13 @@ function init() {
     }
   }
 
-  if (viewNumber) {
-    cameraOffset(viewNumber);
-  }
-
   // Controls
   controls = new THREE.FirstPersonControls( camera );
+
+  // Renderer
+  renderer = new THREE.WebGLRenderer( {antialias : true});
+  renderer.setClearColor( 0x64A0E1 );
+  renderer.setSize( window.innerWidth, window.innerHeight );
 
   // Bounding Box
   var boxLoader = new THREE.ColladaLoader();
@@ -47,11 +50,6 @@ function init() {
     boundingBox.rotation.set(toRadian(-90),toRadian(0),toRadian(0));
     scene.add(boundingBox);
   });
-
-  // Renderer
-  renderer = new THREE.WebGLRenderer( {antialias : true});
-  renderer.setClearColor( 0x64A0E1 );
-  renderer.setSize( window.innerWidth, window.innerHeight );
 
   // Modellen laden
   for (var m = 0; m < jsonSet.length; m++){
@@ -70,33 +68,33 @@ function buildWorld() {
   container.appendChild( renderer.domElement );
 }
 
-  // Tween
-  function floatingTween() {
-    for (i = 0; i < object.length; i++) {
-      var tween = new TWEEN.Tween( object[i].position ).to({z: "+" + floatingTweenAfstand}, jsonSet[i].beweegSnelheid)
-      .easing( TWEEN.Easing.Cubic.InOut);
-      var tweenBack = new TWEEN.Tween( object[i].position ).to({z: "-" + floatingTweenAfstand}, jsonSet[i].beweegSnelheid)
-      .easing( TWEEN.Easing.Cubic.InOut);
-      tween.chain(tweenBack);
-      tweenBack.chain(tween);
-      tween.start();
-    }
+// Tween
+function floatingTween() {
+  for (i = 0; i < object.length; i++) {
+    var tween = new TWEEN.Tween( object[i].position ).to({z: "+" + floatingTweenAfstand}, jsonSet[i].beweegSnelheid)
+    .easing( TWEEN.Easing.Cubic.InOut);
+    var tweenBack = new TWEEN.Tween( object[i].position ).to({z: "-" + floatingTweenAfstand}, jsonSet[i].beweegSnelheid)
+    .easing( TWEEN.Easing.Cubic.InOut);
+    tween.chain(tweenBack);
+    tweenBack.chain(tween);
+    tween.start();
   }
+}
 
 var loader = [];
 var object = [];
-  // Collada Models
-  function modellenLaden(m) {
-    loader[m] = new THREE.ColladaLoader();
-    loader[m].load(String('model/' + jsonSet[m].model + '.dae'), function (result) {
-      object[m] = result.scene;
-      object[m].position.set(jsonSet[m].x, jsonSet[m].z, jsonSet[m].y);
-      object[m].scale.set(jsonSet[m].scale, jsonSet[m].scale, jsonSet[m].scale);
-      object[m].rotation.set(toRadian(jsonSet[m].rotationX),toRadian(jsonSet[m].rotationY),toRadian(jsonSet[m].rotationZ));
-      scene.add(object[m]);
-    });
-  }
-  
+// Collada Models
+function modellenLaden(m) {
+  loader[m] = new THREE.ColladaLoader();
+  loader[m].load(String('model/' + jsonSet[m].model + '.dae'), function (result) {
+    object[m] = result.scene;
+    object[m].position.set(jsonSet[m].x, jsonSet[m].z, jsonSet[m].y);
+    object[m].scale.set(jsonSet[m].scale, jsonSet[m].scale, jsonSet[m].scale);
+    object[m].rotation.set(toRadian(jsonSet[m].rotationX),toRadian(jsonSet[m].rotationY),toRadian(jsonSet[m].rotationZ));
+    scene.add(object[m]);
+  });
+}
+
 // Radians to degree
 function toRadian(degree) {
   radian = degree/57.2957795;
@@ -152,22 +150,16 @@ function render() {
 
 // Load Application
 function loadApp() {
-  if (databaseReady) {
-    init();
-  }
-  else {
-    setTimeout(function() {
-      loadApp();
-    }, 1000);
-  }
+  if (databaseReady) { init(); }
+  else { setTimeout(function() { loadApp(); }, 1000); }
 }
 loadApp();
 
+// Start Application
 socket.on('startApp', function() {
   startApp();
 });
 
-// Start Application
 function startApp() {
   animate();
   floatingTween();
@@ -176,11 +168,11 @@ function startApp() {
 
 // Get URL variablen
 function getUrlVars() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
-    });
-    return vars;
+  var vars = {};
+  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+      vars[key] = value;
+  });
+  return vars;
 }
 
 // Opstijgen en landen

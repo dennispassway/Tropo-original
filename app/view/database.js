@@ -14,7 +14,7 @@ $.getJSON('https://spreadsheets.google.com/feeds/list/0AtGWqQf8eM2OdHVsS2w2QWI5N
     rotationY = data.feed.entry[i].gsx$rotationy.$t;
     rotationZ = data.feed.entry[i].gsx$rotationz.$t;
     beweegSnelheid = data.feed.entry[i].gsx$beweegsnelheid.$t;
-    // Object in jsonSet gooien
+    // Object in jsonSet array gooien
     var object = {'name': name, 'model': model, 'x': x, 'y': y, 'z': z, 'scale': scale, 'rotationX': rotationX, 'rotationY': rotationY, 'rotationZ': rotationZ, 'beweegSnelheid': beweegSnelheid};
     jsonSet.push(object);
 

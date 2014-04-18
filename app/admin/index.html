@@ -1,25 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Admin Area - Tropo</title>
+  <title>Tropo Admin Area</title>
   <meta charset="utf-8">
-  <meta name="description" content="SUPERTROPO!">
   <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-  <!-- Socket -->
   <script src="/socket.io/socket.io.js"></script>
 </head>
 <body style="margin: 0; padding: 0; text-align: center;">
-
   <div id="container">
     <button onclick="startAppButton()">Start Tropo</button>
     <button onclick="stopAppButton()">Stop Tropo</button>
   </div>
   <div id="state"></div>
-
   <script>
     // Connect Socket
     var socket = io.connect('http://192.168.124.147:3000');
-
     function startAppButton() {
       socket.emit('startApplicationPressed');
       document.getElementById('state').innerHTML = "";
@@ -31,6 +26,5 @@
       document.getElementById('state').appendChild(document.createTextNode('Tropo is Stopped. Start it again!'));
     }
   </script>
-
 </body>
 </html>

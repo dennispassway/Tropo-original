@@ -38,7 +38,7 @@ setInterval(function() {
   kanteling = gamma;
   // bocht = alpha/3.6;
 
-  // Accelerometer
+  // Accelerometer kijkt of beweging is
   if (arGamma > 0.035 || arGamma < -0.035) {
     if (arBeta > 0.030 || arBeta < -0.030) {
       controllerMoves = true;

@@ -14,7 +14,7 @@ var heightScreen2 = 1080;
 
 var boundingBoxScale = 5000;
 
-var floatingTweenAfstand = 400;
+var floatingTweenAfstand = 500;
 
 var afstandAnimatie = 500;
 var rotatieSnelheidAnimatie = 0.02;

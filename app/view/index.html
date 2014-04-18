@@ -5,31 +5,17 @@
   <meta charset="utf-8">
   <meta name="description" content="SUPERTROPO!">
   <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="style.css">
   <script src="/socket.io/socket.io.js"></script>
   <script src="socket/socket.js"></script>
 </head>
-<body style="margin: 0; padding: 0; text-align: center; background-color: #000; color: #fff;">
-
-<style>
-  .startScreen {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    color: #fff;
-    background-color: rgba(0,0,0,0.2);
-    font-family: arial;
-    text-transform: uppercase;
-    padding-top: 20%;
-    display: none;
-  }
-</style>
+<body>
 
 <div class="startScreen">
   <h1>Expeditie Tropo</h1>
   <h3>Een leerzame ontdekkende vlieg ervaring</h3>
 </div>
 
-  <!-- Container -->
   <div id="container">
     ... loading ...
   </div>
@@ -39,18 +25,14 @@
   <script src="lib/three.min.js"></script>
   <script src="lib/collada.js"></script>
   <script src="lib/tween.js"></script>
-
   <!-- Variables -->
   <script src="vars.js"></script>
-
   <!-- Controls -->
   <!-- <script src="controls/controllercontrols.js"></script> -->
   <script src="controls/mousecontrols.js"></script>
-
-  <!-- Dependables -->
+  <!-- Dependencies -->
   <script src="database.js"></script>
   <script src="kinect/kinect.js"></script>
-
   <!-- View -->
   <script src="view.js"></script>
 
