@@ -18,7 +18,7 @@ int previousY;
 void setup() { 
   size(50, 50);
 //  c = new Client(this, "localhost", 8080);
-  c = new Client(this, "192.168.124.139", 8080);
+  c = new Client(this, "192.168.124.147", 8080);
   
   kinect = new SimpleOpenNI(this);
   kinect.enableDepth();
@@ -26,17 +26,16 @@ void setup() {
   // Kinect beeld omdraaien
   kinect.setMirror(true);
   
-  
   //Framerate 10, maar 10 keer per seconde sturen!
   frameRate(10);
 } 
 
 void draw() {
-  float w = 640;
-  float h = 480;
+  float w = 1000;
+  float h = 800;
   
   // Afstand dichtste punt van Kinect
-  closestValue = 2000;
+  closestValue = 5000;
   
   kinect.update();
   
@@ -65,13 +64,13 @@ void draw() {
           // ik map hier de waardes, om hem proper fullscreen te kunnen draaien.
           // ik map de x andersom, omdat de Kinect standaard draait.
           closestX = map(x, 0, 640, 1000, 0);
-          closestY = map(y, 0, 480, 0, 1000);
+          closestY = map(y, 0, 480, 800, 0);
           closestZ = int(currentDepthValue);
         }
       }
     }
-    // Activeer depthImage
-    // image(kinect.depthImage(),0,0, w, h);
+//    // Activeer depthImage
+//    image(kinect.depthImage(),0,0, w, h);
     
 //    // Pointer
 //    noStroke();
@@ -80,5 +79,4 @@ void draw() {
     
     // Stuur data
     c.write(closestX + "," + closestY + "," + closestZ);
-    // println(closestZ);
 }

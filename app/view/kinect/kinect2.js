@@ -19,6 +19,6 @@ function processingVerwerks() {
 	box.rotation.set(camera.rotation.x, camera.rotation.y, camera.rotation.z);
   	
   if(processingData) {
-    box2.position.set(closestX-500, closestY-400, -closestZ);
+    box2.position.set(closestX-500, closestY-400, -closestZ-1000);
   }
 }
