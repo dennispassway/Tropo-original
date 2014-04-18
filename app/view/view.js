@@ -164,6 +164,7 @@ function startApp() {
   animate();
   floatingTween();
   opstijgenLandenCheck();
+  backgroundMusic.play();
 }
 
 // Get URL variablen
@@ -226,3 +227,7 @@ function landen() {
     else { clearInterval(intervaller); }
   }, 100);
 }
+
+// Geluid
+var backgroundMusic = new Audio('sounds/backgroundMusic.mp3');
+backgroundMusic.loop = true;
