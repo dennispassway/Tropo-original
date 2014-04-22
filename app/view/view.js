@@ -3,7 +3,7 @@ var clock = new THREE.Clock();
 
 THREE.DefaultLoadingManager.onProgress = function ( item, loaded, total ) {
   // console.log(loaded + "/" + total + ". Total lengte is: " + jsonSet.length);
-  if ( loaded == (jsonSet.length+1) ) { 
+  if ( loaded == 8 ) { 
     console.log('Finished Loading.')
   }
 };
@@ -83,17 +83,6 @@ function floatingTween() {
 
 var loader = [];
 var object = [];
-// Collada Models
-function modellenLaden(m) {
-  loader[m] = new THREE.ColladaLoader();
-  loader[m].load(String('model/' + jsonSet[m].model + '.dae'), function (result) {
-    object[m] = result.scene;
-    object[m].position.set(jsonSet[m].x, jsonSet[m].z, jsonSet[m].y);
-    object[m].scale.set(jsonSet[m].scale, jsonSet[m].scale, jsonSet[m].scale);
-    object[m].rotation.set(toRadian(jsonSet[m].rotationX),toRadian(jsonSet[m].rotationY),toRadian(jsonSet[m].rotationZ));
-    scene.add(object[m]);
-  });
-}
 
 // Radians to degree
 function toRadian(degree) {
@@ -125,7 +114,8 @@ function checkDistance() {
     if (camera.position.x  > object[i].position.x - afstandAnimatie && camera.position.x < object[i].position.x  + afstandAnimatie) {
       if (camera.position.y  > object[i].position.y - afstandAnimatie && camera.position.y < object[i].position.y  + afstandAnimatie) {
         if (camera.position.z  > object[i].position.z - afstandAnimatie && camera.position.z < object[i].position.z  + afstandAnimatie) {
-          object[i].rotation.y += rotatieSnelheidAnimatie;
+          console.log('Object that animates:' + i);
+          object[i].animatie.runAnimatie();
         }
       }
     }
