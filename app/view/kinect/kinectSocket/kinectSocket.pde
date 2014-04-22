@@ -18,7 +18,7 @@ int previousY;
 void setup() { 
   size(50, 50);
 //  c = new Client(this, "localhost", 8080);
-  c = new Client(this, "192.168.124.147", 8080);
+  c = new Client(this, "192.168.124.139", 8080);
   
   kinect = new SimpleOpenNI(this);
   kinect.enableDepth();

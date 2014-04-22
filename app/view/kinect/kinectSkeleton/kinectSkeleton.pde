@@ -19,7 +19,7 @@ float userPosZ;
 
 void setup()
 {
-  c = new Client(this, "192.168.124.147", 8080);
+  c = new Client(this, "192.168.124.139", 8080);
   
   size(1024,768,P3D);
   context = new SimpleOpenNI(this);
