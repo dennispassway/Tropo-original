@@ -1,4 +1,5 @@
 function modellenLaden(m) {
+  
   switch(jsonSet[m].model){
     case 'wolk1':
     object[m] = wolk1.clone();
@@ -22,6 +23,7 @@ function modellenLaden(m) {
     object[m] = narwal.clone();
     break;
   }
+
   object[m].name = jsonSet[m].name;
   object[m].position.set(jsonSet[m].x, jsonSet[m].z, jsonSet[m].y);
   object[m].scale.set(jsonSet[m].scale, jsonSet[m].scale, jsonSet[m].scale);
