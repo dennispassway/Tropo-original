@@ -42,7 +42,7 @@ function init() {
 
   // Renderer
   renderer = new THREE.WebGLRenderer( {antialias : true});
-  renderer.setClearColor( 0x64A0E1 );
+  renderer.setClearColor( 0xA2BED8 );
   renderer.setSize( window.innerWidth, window.innerHeight );
 
   // Bounding Box
