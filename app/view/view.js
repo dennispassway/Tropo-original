@@ -4,7 +4,10 @@ var clock = new THREE.Clock();
 THREE.DefaultLoadingManager.onProgress = function ( item, loaded, total ) {
   // console.log(loaded + "/" + total + ". Total lengte is: " + jsonSet.length);
   if ( loaded == 8 ) { 
-    console.log('Finished Loading.')
+    console.log('Finished Loading.');
+    // Create world
+    container.innerHTML = "";
+    container.appendChild( renderer.domElement );
   }
 };
 
@@ -56,69 +59,9 @@ function init() {
     modellenLaden(m);
   }
 
-  buildWorld();
   initKinect();
 
   window.addEventListener( 'resize', onWindowResize, false );
-}
-
-// Create World
-function buildWorld() {
-  container.innerHTML = "";
-  container.appendChild( renderer.domElement );
-}
-
-// Tween
-function floatingTween() {
-  for (i = 0; i < object.length; i++) {
-    var tween = new TWEEN.Tween( object[i].position ).to({z: "+" + floatingTweenAfstand}, jsonSet[i].beweegSnelheid)
-    .easing( TWEEN.Easing.Cubic.InOut);
-    var tweenBack = new TWEEN.Tween( object[i].position ).to({z: "-" + floatingTweenAfstand}, jsonSet[i].beweegSnelheid)
-    .easing( TWEEN.Easing.Cubic.InOut);
-    tween.chain(tweenBack);
-    tweenBack.chain(tween);
-    tween.start();
-  }
-}
-
-var loader = [];
-var object = [];
-
-// Radians to degree
-function toRadian(degree) {
-  radian = degree/57.2957795;
-  return radian;
-}
-
-// Window resize functie
-function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize( window.innerWidth, window.innerHeight );
-  controls.handleResize();
-}
-
-// Box to limit maximum movement
-function movementBox() {
-  if (camera.position.y < 0) { camera.position.y = 0; }
-  if (camera.position.y > 5000) { camera.position.y = 5000; }
-  if (camera.position.x < -4000) {camera.position.x = -4000};
-  if (camera.position.x > 4000) {camera.position.x = 4000};
-  if (camera.position.z < -4000) {camera.position.z = -4000};
-  if (camera.position.z > 4000) {camera.position.z = 4000};
-}
-
-// Check Nearness
-function checkDistance() {
-  for (i = 0; i < object.length; i++) {
-    if (camera.position.x  > object[i].position.x - afstandAnimatie && camera.position.x < object[i].position.x  + afstandAnimatie) {
-      if (camera.position.y  > object[i].position.y - afstandAnimatie && camera.position.y < object[i].position.y  + afstandAnimatie) {
-        if (camera.position.z  > object[i].position.z - afstandAnimatie && camera.position.z < object[i].position.z  + afstandAnimatie) {
-          object[i].animatie.runAnimatie();
-        }
-      }
-    }
-  }
 }
 
 // Animate
@@ -136,87 +79,3 @@ function render() {
   controls.update( clock.getDelta() );
   renderer.render( scene, camera );
 } 
-
-// Load Application
-function loadApp() {
-  if (databaseReady) { init(); }
-  else { setTimeout(function() { loadApp(); }, 1000); }
-}
-loadApp();
-
-// Start Application
-socket.on('startApp', function() {
-  startApp();
-});
-
-function startApp() {
-  animate();
-  floatingTween();
-  opstijgenLandenCheck();
-  backgroundMusic.play();
-}
-
-// Get URL variablen
-function getUrlVars() {
-  var vars = {};
-  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-      vars[key] = value;
-  });
-  return vars;
-}
-
-// Opstijgen en landen
-function opstijgenLandenCheck() {
-  var vliegend = false;
-  var secondenBeweegs = 0;
-  var secondenStil = 0;
-
-  setInterval(function() {
-    if (controllerMoves == true && vliegend == false ) {
-      secondenBeweegs++;
-      if (secondenBeweegs > 1) {
-        if (controllerMoves == true && vliegend == false ) {
-          opstijgen();
-          secondenBeweegs = 0;
-          vliegend = true;
-        }
-      }
-    }
-    if (controllerMoves == true && vliegend == true ) {
-      secondenStil = 0;
-    }
-    if(controllerMoves == false && vliegend == true) {
-      secondenStil++;
-      if (secondenStil > 5) {
-        if (controllerMoves == false && vliegend == true) {
-          landen();
-          secondenStil = 0;
-          vliegend = false;
-          }
-      }
-    }
-    // Debuglines
-    // console.log('vlieg: ' + vliegend);
-    // console.log('moves: ' + controllerMoves);
-    // console.log('seconden beweegs: ' + secondenBeweegs);
-    // console.log('seconden stil: ' + secondenStil);
-  }, 1000);
-}
-
-function opstijgen() {
-  var intervaller = setInterval(function() {
-    if (scene.fog.density > vliegWaarde){ scene.fog.density -= densityStijging; }
-    else { clearInterval(intervaller); }
-  }, 100);
-}
-
-function landen() {
-  var intervaller = setInterval(function() {
-    if (scene.fog.density < landWaarde){ scene.fog.density += densityStijging; }
-    else { clearInterval(intervaller); }
-  }, 100);
-}
-
-// Geluid
-var backgroundMusic = new Audio('sounds/backgroundMusic.mp3');
-backgroundMusic.loop = true;
