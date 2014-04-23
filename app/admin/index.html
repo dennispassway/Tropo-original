@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
   <script src="/socket.io/socket.io.js"></script>
+  <script src="/socketConnect.js"></script>
 </head>
 <body style="margin: 0; padding: 0; text-align: center;">
   <div id="container">
@@ -13,8 +14,6 @@
   </div>
   <div id="state"></div>
   <script>
-    // Connect Socket
-    var socket = io.connect('http://192.168.124.147:3000');
     function startAppButton() {
       socket.emit('startApplicationPressed');
       document.getElementById('state').innerHTML = "";
