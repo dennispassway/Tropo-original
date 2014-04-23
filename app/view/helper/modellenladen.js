@@ -1,3 +1,5 @@
+var object = [];
+
 function modellenLaden(m) {
   
   switch(jsonSet[m].model){
