@@ -11,8 +11,12 @@ socket.on('startApp', function() {
 });
 
 function startApp() {
+
+  setTimeout(function(){
+    $('.startScreen').fadeTo(2000,0)
+  },3000);
+  
   animate();
-  floatingTween();
   opstijgenLandenCheck();
   backgroundMusic.play();
 }
