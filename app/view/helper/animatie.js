@@ -9,7 +9,7 @@ function animatie(thisObject,thisAnimatie) {
   if (this.thisAnimatie == 'turnUp') {
     this.runAnimatie = function() {
       thisObject.rotation.x += 0.1;
-      pinguinSound.play();
+      // pinguinSound.play();
     }
   }
   if (this.thisAnimatie == 'turnSide') {

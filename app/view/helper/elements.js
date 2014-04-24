@@ -1,6 +1,4 @@
-var wolk1,wolk2,wolk3;
-var pinguin1,pinguin2;
-var ijsbeer,narwhal;
+var wolk1,wolk2,wolk3, pinguin1,pinguin2, ijsbeer,narwhal;
 
 // Wolken
 wolk1Loader = new THREE.ColladaLoader();
