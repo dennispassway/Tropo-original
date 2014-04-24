@@ -1,23 +1,27 @@
-// Box to limit maximum movement
-function movementBox() {
-  if (camera.position.y < 0) { camera.position.y = 0; }
-  if (camera.position.y > 5000) { camera.position.y = 5000; }
-  if (camera.position.x < -4000) {camera.position.x = -4000};
-  if (camera.position.x > 4000) {camera.position.x = 4000};
-  if (camera.position.z < -4000) {camera.position.z = -4000};
-  if (camera.position.z > 4000) {camera.position.z = 4000};
+verschilX = [];
+verschilY = [];
+verschilZ = [];
+function checkPositionDistance(i) {
+  for (i=0; i < object.length; i++){
+    if(object[i].position.distanceTo(camera.position) > activeArea) {
+      verschilX[i] = object[i].position.x - camera.position.x;
+      verschilY[i] = object[i].position.y - camera.position.y;
+      verschilZ[i] = object[i].position.z - camera.position.z;
+
+      if (verschilX[i] < -activeArea) { object[i].position.x = object[i].position.x + (2*activeArea-200)}
+      if (verschilX[i] > activeArea) { object[i].position.x = object[i].position.x - (2*activeArea-200)}
+      if (verschilY[i] < -activeArea) { object[i].position.y = object[i].position.y + (2*activeArea-200)}
+      if (verschilY[i] > activeArea) { object[i].position.y = object[i].position.y - (2*activeArea-200)}
+      if (verschilZ[i] < -activeArea) { object[i].position.z = object[i].position.z + (2*activeArea-200)}
+      if (verschilZ[i] > activeArea) { object[i].position.z = object[i].position.z - (2*activeArea-200)}
+    }
+  }
 }
 
 // Check Nearness
-function checkDistance() {
+function checkAnimationDistance() {
   for (i = 0; i < object.length; i++) {
-    if (camera.position.x  > object[i].position.x - afstandAnimatie && camera.position.x < object[i].position.x  + afstandAnimatie) {
-      if (camera.position.y  > object[i].position.y - afstandAnimatie && camera.position.y < object[i].position.y  + afstandAnimatie) {
-        if (camera.position.z  > object[i].position.z - afstandAnimatie && camera.position.z < object[i].position.z  + afstandAnimatie) {
-          object[i].animatie.runAnimatie();
-        }
-      }
-    }
+    if (object[i].position.distanceTo(camera.position) < afstandAnimatie) { object[i].animatie.runAnimatie(); }
   }
 }
 
