@@ -36,15 +36,16 @@ function opstijgenLandenCheck() {
   }, 1000);
 }
 
+var intervaller;
 function opstijgen() {
-  var intervaller = setInterval(function() {
+  intervaller = setInterval(function() {
     if (scene.fog.density > vliegWaarde){ scene.fog.density -= densityStijging; }
     else { clearInterval(intervaller); }
   }, 100);
 }
 
 function landen() {
-  var intervaller = setInterval(function() {
+  intervaller = setInterval(function() {
     if (scene.fog.density < landWaarde){ scene.fog.density += densityStijging; }
     else { clearInterval(intervaller); }
   }, 100);
