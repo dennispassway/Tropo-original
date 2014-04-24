@@ -20,3 +20,24 @@ function onWindowResize() {
   renderer.setSize( window.innerWidth, window.innerHeight );
   controls.handleResize();
 }
+
+// Only for development
+function area() {
+  boundingBoxGeo = new THREE.CubeGeometry( activeArea, activeArea, activeArea );
+  boundingBoxMat = new THREE.MeshBasicMaterial( {color: 0xff00ff} );
+  boundingBox = new THREE.Mesh(boundingBoxGeo, boundingBoxMat);
+  boundingBox.material.side = THREE.DoubleSide;
+  boundingBox.material.transparent = true;
+  boundingBox.material.opacity = 0.6;
+  boundingBox.position.y = activeArea/2;
+  scene.add(boundingBox);
+}
+
+// Bounding Box
+// var boxLoader = new THREE.ColladaLoader();
+// boxLoader.load(String('model/boundingBox/boundingBox.dae'), function (result) {
+//   boundingBox = result.scene;
+//   boundingBox.scale.set(boundingBoxScale,boundingBoxScale,boundingBoxScale);
+//   boundingBox.rotation.set(toRadian(-90),toRadian(0),toRadian(0));
+//   scene.add(boundingBox);
+// });
