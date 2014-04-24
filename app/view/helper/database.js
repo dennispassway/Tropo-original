@@ -15,7 +15,7 @@ $.getJSON('https://spreadsheets.google.com/feeds/list/0AtGWqQf8eM2OdHVsS2w2QWI5N
     rotationZ = data.feed.entry[i].gsx$rotationz.$t;
     beweegSnelheid = data.feed.entry[i].gsx$beweegsnelheid.$t;
     // Object in jsonSet array gooien
-    var object = {'name': name, 'model': model, 'x': x, 'y': y, 'z': z, 'scale': scale, 'rotationX': rotationX, 'rotationY': rotationY, 'rotationZ': rotationZ, 'beweegSnelheid': beweegSnelheid};
+    var object = {'name': name, 'model': model, 'x': parseFloat(x), 'y': parseFloat(y), 'z': parseFloat(z), 'scale': parseFloat(scale), 'rotationX': parseFloat(rotationX), 'rotationY': parseFloat(rotationY), 'rotationZ': parseFloat(rotationZ), 'beweegSnelheid': parseFloat(beweegSnelheid)};
     jsonSet.push(object);
 
     // Als forloop klaar is, is database klaar, dus init.
