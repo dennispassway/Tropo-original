@@ -27,6 +27,7 @@ function modellenLaden(m) {
   }
 
   object[m].name = jsonSet[m].name;
+  object[m].type = jsonSet[m].model;
   object[m].position.set(jsonSet[m].x, jsonSet[m].y, jsonSet[m].z);
   object[m].scale.set(jsonSet[m].scale, jsonSet[m].scale, jsonSet[m].scale);
   object[m].rotation.set(toRadian(jsonSet[m].rotationX),toRadian(jsonSet[m].rotationY),toRadian(jsonSet[m].rotationZ));
