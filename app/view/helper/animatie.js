@@ -1,20 +1,22 @@
-function animatie(thisObject,thisAnimatie) {
+function animatie(thisObject) {
   this.rotationSpeed = 0.1;
-  if (!thisAnimatie){ thisAnimatie = 'turnUp' }
-  this.thisAnimatie = thisAnimatie;
+  this.objectType = thisObject.type;
 
   // Sounds
   pinguinSound = new Audio('sounds/pinguin.mp3');
+  ijsbeerSound = new Audio('sounds/ijsbeer.mp3');
 
-  if (this.thisAnimatie == 'turnUp') {
-    this.runAnimatie = function() {
-      thisObject.rotation.x += 0.1;
-      // pinguinSound.play();
+  //No Type
+  if (this.objectType != 'ijsbeer') {
+    this.nearObjectAnimation = function() {
+      console.log('no animation for this object');
     }
   }
-  if (this.thisAnimatie == 'turnSide') {
-    this.runAnimatie = function() {
-      thisObject.rotation.y += 0.1;
+
+  //Ijsbeer op wolk
+  if (this.objectType == 'ijsbeer') {
+    this.nearObjectAnimation = function() {
+      ijsbeerSound.play();
     }
   }
 
