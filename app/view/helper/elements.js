@@ -1,4 +1,4 @@
-var wolk1,wolk2,wolk3, pinguin1,pinguin2, ijsbeer,narwhal;
+var wolk1,wolk2,wolk3, pinguin1,pinguin2, ijsbeer,narwhal,meeuw;
 
 // Wolken
 wolk1Loader = new THREE.ColladaLoader();
@@ -37,4 +37,10 @@ ijsbeerLoader.load('model/ijsbeer.dae', function(result) {
 narwalLoader = new THREE.ColladaLoader();
 narwalLoader.load('model/narwal.dae', function(result) {
   narwal = result.scene;
+});
+
+// Meeuw
+meeuwLoader = new THREE.ColladaLoader();
+meeuwLoader.load('model/meeuw.dae', function(result) {
+  meeuw = result.scene;
 });
