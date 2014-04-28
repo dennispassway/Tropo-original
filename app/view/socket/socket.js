@@ -1,7 +1,7 @@
 // Variabelen
 var updateDelay = 100;
-var controller = [0,0,0,0,0,0];
-var aplha, beta, gamma, hoogte, kanteling, bocht;
+var controller = [0,0,0,0,0,0,0];
+var aplha, beta, gamma, hoogte, kanteling, bocht,welkeKant;
 
 var processingData, closestX, closestY, closestZ;
 
@@ -33,7 +33,8 @@ setInterval(function() {
   // Omgerekend
   hoogte = beta;
   kanteling = gamma;
-  // bocht = alpha/3.6;
+  // bocht = alpha;
+  welkeKant = controller[6];
 
   // Accelerometer kijkt of beweging is
   if (arGamma > 0.035 || arGamma < -0.035) {
