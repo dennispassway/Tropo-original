@@ -53,29 +53,6 @@ setInterval(function() {
   }
 }, updateDelay);
 
-// Kompas check
-var welkeKant = 0;
-setInterval(function() {
-  // Set nieuwe en oude alpha
-  alphaNew = alpha;
-
-  // Als nieuwe groter is dan oude
-  if(alphaNew > alphaLast) {
-    if (alphaNew-alphaLast > 5) {
-      welkeKant = -(alphaNew-alphaLast)*2;
-    }
-  }
-  // Als nieuwe kleiner is dan oude
-  else if (alphaNew < alphaLast) {
-    if (alphaNew-alphaLast < - 5) {
-      welkeKant = -(alphaNew-alphaLast)*2;
-    }
-  }
-
-  alphaLast = alphaNew;
-
-}, updateDelay);
-
   // Lerpen
 setInterval(function() {
   alphaNew = alpha;
@@ -93,7 +70,7 @@ setInterval(function() {
 
 // Naar Socket sturen
 setInterval(function() {
-  var controllerData = [alpha,beta,gamma,arAlpha,arBeta,arGamma,welkeKant];
+  var controllerData = [alpha,beta,gamma,arAlpha,arBeta,arGamma];
   socket.emit('controllerMovement', controllerData);
 }, updateDelay);
 
@@ -111,6 +88,4 @@ setInterval(function() {
   document.getElementById('arBeta').appendChild(document.createTextNode(arBeta));
   document.getElementById('arGamma').innerHTML = '';
   document.getElementById('arGamma').appendChild(document.createTextNode(arGamma));
-  document.getElementById('zo').innerHTML = '';
-  document.getElementById('zo').appendChild(document.createTextNode(welkeKant));
 }, updateDelay);
