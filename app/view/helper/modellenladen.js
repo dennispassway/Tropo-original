@@ -18,6 +18,9 @@ function modellenLaden(m) {
     case 'pinguin2':
     object[m] = pinguin2.clone();
     break;
+    case 'pinguin3':
+    object[m] = pinguin3.clone();
+    break;
     case 'ijsbeer':
     object[m] = ijsbeer.clone();
     break;
