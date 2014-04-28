@@ -9,7 +9,7 @@ function animatie(thisObject) {
   //No Type
   if (this.objectType != 'ijsbeer') {
     this.nearObjectAnimation = function() {
-      console.log('no animation for this object');
+      wiebelen(thisObject);
     }
   }
 
@@ -20,4 +20,13 @@ function animatie(thisObject) {
     }
   }
 
+}
+
+function wiebelen(thisObject) {
+  if (thisObject.rotation.y < toRadian(135) ) {
+    thisObject.rotation.y += 0.1;
+  }
+  if (thisObject.rotation.y > toRadian(45) ) {
+    thisObject.rotation.y -= 0.1;
+  }
 }
