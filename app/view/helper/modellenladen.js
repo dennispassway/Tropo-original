@@ -35,5 +35,6 @@ function modellenLaden(m) {
   object[m].scale.set(jsonSet[m].scale, jsonSet[m].scale, jsonSet[m].scale);
   object[m].rotation.set(toRadian(jsonSet[m].rotationX),toRadian(jsonSet[m].rotationY),toRadian(jsonSet[m].rotationZ));
   object[m].animatie = new animatie(object[m]);
+  // object[m].sound = new sound(object[m]); sound ook in object pompen. JEEHEE.
   scene.add(object[m]);
 }
