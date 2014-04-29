@@ -1,18 +1,27 @@
 var scene,camera,renderer;
-var ijsbeer, animation;
+var ijsbeer;
+var ijsberen = [];
 
 // Loader
-var loader = new THREE.JSONLoader();
-loader.load('model/ijsbeer.js', function (geometry,materials) { 
+ijsbeerLoader = new THREE.JSONLoader();
+ijsbeerLoader.load('model/ijsbeer.js', function (geometry,materials) { 
     ijsbeer = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials)); 
     var materials = ijsbeer.material.materials;
     for (var i = 0,length = materials.length; i < length; i++) { var mat = materials[i]; mat.skinning = true; }
     THREE.AnimationHandler.add(ijsbeer.geometry.animations[0]);
-    ijsbeer.animation = new THREE.Animation(ijsbeer, "ArmatureAction", THREE.AnimationHandler.CATMULLROM);
-    ijsbeer.position.set(0,0,-100);
-
-    init();
 });
+
+// Builder
+function createIJsbeer(i){
+    ijsberen[i] = ijsbeer.clone();
+    ijsberen[i].name = 'ijsbeer';
+    ijsberen[i].type = 'ijsbeer';
+    ijsberen[i].position.set(0,0,0);
+    ijsberen[i].scale.set(1,1,1);
+    ijsberen[i].rotation.set(0,0,0);
+    ijsberen[i].animation = new THREE.Animation(ijsberen[i], "ijsbeeranimation", THREE.AnimationHandler.CATMULLROM);
+    scene.add(ijsberen[i]);
+}
 
 // Init
 function init() {
@@ -32,16 +41,19 @@ function init() {
     container = document.getElementById('container');
     container.innerHTML="";
     container.appendChild(renderer.domElement);
-    // Add Bear
-    scene.add(ijsbeer);
-    // animation.play();
     animate();
+}
+
+// Startbutton
+function startApp() {
+    init();
+    createIJsbeer(0);
 }
 
 // Animate
 function animate() {
     requestAnimationFrame( animate );
-    ijsbeer.animation.update(0.01);
+    for (a = 0; a<ijsberen.length; a++) { ijsberen[a].animation.update(0.01); }
     render();
 }
 
