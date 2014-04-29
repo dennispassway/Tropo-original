@@ -2,6 +2,7 @@ verschilX = [];
 verschilY = [];
 verschilZ = [];
 function checkPositionDistance(i) {
+  // Objects
   for (i=0; i < object.length; i++){
     if(object[i].position.distanceTo(camera.position) > activeArea) {
       verschilX[i] = object[i].position.x - camera.position.x;
@@ -15,6 +16,20 @@ function checkPositionDistance(i) {
       if (verschilZ[i] < -activeArea) { object[i].position.z = object[i].position.z + (2*activeArea-200)}
       if (verschilZ[i] > activeArea) { object[i].position.z = object[i].position.z - (2*activeArea-200)}
     }
+  }
+
+  // Particles
+  if(particleSystem.position.distanceTo(camera.position) > activeArea) {
+    particleVerschilX = particleSystem.position.x - camera.position.x;
+    particleVerschilY = particleSystem.position.y - camera.position.y;
+    particleVerschilZ = particleSystem.position.z - camera.position.z;
+
+    if (particleVerschilX < -activeArea) { particleSystem.position.x = particleSystem.position.x + (2*activeArea-200)}
+    if (particleVerschilX > activeArea) { particleSystem.position.x = particleSystem.position.x - (2*activeArea-200)}
+    if (particleVerschilY < -activeArea) { particleSystem.position.y = particleSystem.position.y + (2*activeArea-200)}
+    if (particleVerschilY > activeArea) { particleSystem.position.y = particleSystem.position.y - (2*activeArea-200)}
+    if (particleVerschilZ < -activeArea) { particleSystem.position.z = particleSystem.position.z + (2*activeArea-200)}
+    if (particleVerschilZ > activeArea) { particleSystem.position.z = particleSystem.position.z - (2*activeArea-200)}
   }
 }
 
@@ -36,4 +51,15 @@ function floatingTween() {
     tweenBack.chain(tween);
     tween.start();
   }
+}
+
+// Bounding Box
+var boxLoader = new THREE.ColladaLoader();
+function loadBoundingBox() {
+  boxLoader.load(String('model/boundingBox/boundingBox.dae'), function (result) {
+  boundingBox = result.scene;
+  boundingBox.scale.set(boundingBoxScale,boundingBoxScale,boundingBoxScale);
+  boundingBox.rotation.set(toRadian(-90),toRadian(0),toRadian(0));
+  scene.add(boundingBox);
+});
 }

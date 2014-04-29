@@ -32,12 +32,3 @@ function area() {
   boundingBox.position.y = activeArea/2;
   scene.add(boundingBox);
 }
-
-// Bounding Box
-// var boxLoader = new THREE.ColladaLoader();
-// boxLoader.load(String('model/boundingBox/boundingBox.dae'), function (result) {
-//   boundingBox = result.scene;
-//   boundingBox.scale.set(boundingBoxScale,boundingBoxScale,boundingBoxScale);
-//   boundingBox.rotation.set(toRadian(-90),toRadian(0),toRadian(0));
-//   scene.add(boundingBox);
-// });

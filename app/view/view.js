@@ -1,4 +1,4 @@
-var container, camera, controls, scene, renderer;
+var container, camera, controls, scene, renderer, boundingBox;
 var clock = new THREE.Clock();
 
 THREE.DefaultLoadingManager.onProgress = function ( item, loaded, total ) {
@@ -31,6 +31,12 @@ function init() {
     modellenLaden(m);
   }
 
+  // Bounding Box
+  loadBoundingBox();
+
+  // Particles
+  addParticles();
+
   // Create world
   container.innerHTML = "";
   container.appendChild( renderer.domElement );
@@ -46,9 +52,11 @@ function animate() {
   checkPositionDistance();
   checkAnimationDistance();
   processingVerwerks();
-  // floatingTween();
+  boundingBox.position.set(camera.position.x,camera.position.y,camera.position.z);
+  updateParticles();
   TWEEN.update();
   render();
+  // floatingTween();
 }
 
 // Render
