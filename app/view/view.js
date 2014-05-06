@@ -1,11 +1,6 @@
 var container, camera, controls, scene, renderer, boundingBox;
 var clock = new THREE.Clock();
 
-THREE.DefaultLoadingManager.onProgress = function ( item, loaded, total ) {
-  // console.log(loaded + "/" + total + ". Total lengte is: " + jsonSet.length);
-  if ( loaded == total ) { console.log('Finished Loading.'); }
-};
-
 function init() {
   container = document.getElementById( 'container' );
 
@@ -31,10 +26,8 @@ function init() {
     modellenLaden(m);
   }
 
-  // Bounding Box
-  loadBoundingBox();
-
-  // Particles
+  // Bounding Box & Particles
+  loadSkyBox();
   addParticles();
 
   // Create world
@@ -52,11 +45,13 @@ function animate() {
   checkPositionDistance();
   checkAnimationDistance();
   processingVerwerks();
-  boundingBox.position.set(camera.position.x,camera.position.y,camera.position.z);
+  skybox.position.set(camera.position.x,camera.position.y,camera.position.z);
   updateParticles();
-  TWEEN.update();
+  // Animation update
+  for (a = 0; a<object.length; a++) {
+    if (object[a].animation) { object[a].animation.update(0.02); }
+  }
   render();
-  // floatingTween();
 }
 
 // Render
