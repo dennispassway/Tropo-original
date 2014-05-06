@@ -20,15 +20,3 @@ function onWindowResize() {
   renderer.setSize( window.innerWidth, window.innerHeight );
   controls.handleResize();
 }
-
-// Only for development
-function area() {
-  boundingBoxGeo = new THREE.CubeGeometry( activeArea, activeArea, activeArea );
-  boundingBoxMat = new THREE.MeshBasicMaterial( {color: 0xff00ff} );
-  boundingBox = new THREE.Mesh(boundingBoxGeo, boundingBoxMat);
-  boundingBox.material.side = THREE.DoubleSide;
-  boundingBox.material.transparent = true;
-  boundingBox.material.opacity = 0.6;
-  boundingBox.position.y = activeArea/2;
-  scene.add(boundingBox);
-}

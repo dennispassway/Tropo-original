@@ -5,6 +5,7 @@ function setCameras() {
   if (viewNumber) {
     cameraOffset(viewNumber);
   }
+  
   function cameraOffset(number) {
     if (number == 1) {
       camera.setViewOffset( widthScreen1 + widthScreen2, heightScreen1, 0, 0, widthScreen1, heightScreen1 );

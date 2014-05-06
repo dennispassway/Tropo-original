@@ -7,25 +7,24 @@ function opstijgenLandenCheck() {
   setInterval(function() {
     if (controllerMoves == true && vliegend == false ) {
       secondenBeweegs++;
-      if (secondenBeweegs > 1) {
-        if (controllerMoves == true && vliegend == false ) {
-          opstijgen();
-          secondenBeweegs = 0;
-          vliegend = true;
-        }
+
+      if (secondenBeweegs > 1 && controllerMoves == true && vliegend == false) {
+        opstijgen();
+        secondenBeweegs = 0;
+        vliegend = true;
       }
     }
+
     if (controllerMoves == true && vliegend == true ) {
       secondenStil = 0;
     }
+
     if(controllerMoves == false && vliegend == true) {
       secondenStil++;
-      if (secondenStil > 5) {
-        if (controllerMoves == false && vliegend == true) {
+      if (secondenStil > 5 && controllerMoves == false && vliegend == true) {
           landen();
           secondenStil = 0;
           vliegend = false;
-          }
       }
     }
     // Debuglines

@@ -36,30 +36,18 @@ function checkPositionDistance(i) {
 // Check Nearness
 function checkAnimationDistance() {
   for (i = 0; i < object.length; i++) {
-    if (object[i].position.distanceTo(camera.position) < afstandAnimatie) { object[i].animatie.nearObjectAnimation(); }
+    if (object[i].position.distanceTo(camera.position) < afstandAnimatie) {
+      object[i].worldAnimation.nearObjectAnimation();
+    }
   }
 }
 
-// Tween
-function floatingTween() {
-  for (i = 0; i < object.length; i++) {
-    var tween = new TWEEN.Tween( object[i].position ).to({z: "+" + floatingTweenAfstand}, jsonSet[i].beweegSnelheid)
-    .easing( TWEEN.Easing.Cubic.InOut);
-    var tweenBack = new TWEEN.Tween( object[i].position ).to({z: "-" + floatingTweenAfstand}, jsonSet[i].beweegSnelheid)
-    .easing( TWEEN.Easing.Cubic.InOut);
-    tween.chain(tweenBack);
-    tweenBack.chain(tween);
-    tween.start();
-  }
-}
-
-// Bounding Box
-var boxLoader = new THREE.ColladaLoader();
-function loadBoundingBox() {
-  boxLoader.load(String('model/boundingBox/boundingBox.dae'), function (result) {
-  boundingBox = result.scene;
-  boundingBox.scale.set(boundingBoxScale,boundingBoxScale,boundingBoxScale);
-  boundingBox.rotation.set(toRadian(-90),toRadian(0),toRadian(0));
-  scene.add(boundingBox);
-});
+// Sky Box
+function loadSkyBox() {
+  skyboxLoader = new THREE.JSONLoader();
+  skyboxLoader.load('model/boundingBox/boundingBox.js', function (geometry,materials) { 
+      skybox = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials)); 
+      skybox.scale.set(7,7,7);
+      scene.add(skybox);
+  });
 }

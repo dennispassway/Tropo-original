@@ -11,10 +11,9 @@ function addParticles() {
 
   // now create the individual particles
   for (var p = 0; p < particleCount; p++) {
-    // create a particle with random position values, -250 -> 250
-    var pX = (Math.random()*18000)-9000;
-    var pY = (Math.random()*18000)-9000;
-    var pZ = (Math.random()*18000)-9000;
+    var pX = (Math.random()*18000) - 9000;
+    var pY = (Math.random()*18000) - 9000;
+    var pZ = (Math.random()*18000) - 9000;
     particle = new THREE.Vector3(pX, pY, pZ);
     // create a velocity vector
     particle.velocity = new THREE.Vector3(0,-Math.random(),0);
