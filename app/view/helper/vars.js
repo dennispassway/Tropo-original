@@ -7,7 +7,7 @@ var startFogAfstand = vliegWaarde;
 
 var fov = 40;
 var near = 1;
-var far = activeArea+1500;
+var far = activeArea+4000;
 
 var widthScreen1 = 1920;
 var heightScreen1 = 1080;
@@ -16,7 +16,7 @@ var heightScreen2 = 1080;
 
 var floatingTweenAfstand = 500;
 
-var afstandAnimatie = 800;
+var afstandAnimatie = 2000;
 var rotatieSnelheidAnimatie = 0.02;
 
 var ControllerMovementSpeed = 600;

@@ -47,9 +47,10 @@ function animate() {
   processingVerwerks();
   skybox.position.set(camera.position.x,camera.position.y,camera.position.z);
   updateParticles();
-  // Animation update
+  // Object animation update
   for (a = 0; a<object.length; a++) {
     if (object[a].animation) { object[a].animation.update(0.02); }
+    if (object[a].worldAnimation.movementAnimation) { object[a].worldAnimation.movementAnimation(); }
   }
   render();
 }
