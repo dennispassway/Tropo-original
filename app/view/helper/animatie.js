@@ -7,7 +7,9 @@ function worldAnimation(thisObject) {
       }
     }
 
-    //thisObject.sound.play();
+    if (typeof thisObject.sound.play == 'function') {
+      thisObject.sound.play();
+    }
   }
 
   this.movementAnimation = function() {
