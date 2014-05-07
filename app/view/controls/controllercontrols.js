@@ -84,7 +84,7 @@ THREE.FirstPersonControls = function ( object, domElement ) {
       verticalLookRatio = Math.PI / ( this.verticalMax - this.verticalMin );
     }
 
-    this.lon += kanteling * actualLookSpeed;
+    this.lon += -kanteling * actualLookSpeed;
     if( this.lookVertical ) this.lat -= -hoogte * actualLookSpeed * verticalLookRatio;
 
     this.lat = Math.max( - 85, Math.min( 85, this.lat ) );
