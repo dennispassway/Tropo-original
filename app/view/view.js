@@ -10,7 +10,6 @@ function init() {
 
   // Camera
   camera = new THREE.PerspectiveCamera( fov, window.innerWidth / window.innerHeight, near, far );
-  camera.position.set(0,0,0);
   setCameras();
 
   // Controls

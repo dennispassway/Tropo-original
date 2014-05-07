@@ -2,7 +2,7 @@ var particleCount, particleSystem, pCount;
 
 function addParticles() {
   // create the particle variables
-  particleCount = 10000,
+  particleCount = 6000,
   particles = new THREE.Geometry(),
   pMaterial = new THREE.ParticleBasicMaterial({
     color: 0xffffff,
