@@ -2,6 +2,11 @@
 var updateDelay = 100;
 var controller = [0,0,0,0,0,0];
 var alpha, beta, gamma, hoogte, kanteling, bocht;
+var user0 = [0,0,0];
+var user1 = [0,0,0];
+var user2 = [0,0,0];
+var user3 = [0,0,0];
+var user4 = [0,0,0];
 
 var processingData, closestX, closestY, closestZ;
 
@@ -51,6 +56,25 @@ setInterval(function() {
       closestX = parseFloat(res[0]);
       closestY = parseFloat(res[1]);
       closestZ = parseFloat(res[2]);
+
+      //Data verwerken per user
+      switch (userId) {
+        case 0:
+          user0 = [closestX, closestY, closestZ];
+        break;
+        case 1:
+          user1 = [closestX, closestY, closestZ];
+        break;
+        case 2:
+          user2 = [closestX, closestY, closestZ];
+        break;
+        case 3:
+          user3 = [closestX, closestY, closestZ];
+        break;
+        case 4:
+          user4 = [closestX, closestY, closestZ];
+        break;
+      }
     }
-    
+
 }, updateDelay);
