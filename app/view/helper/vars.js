@@ -16,7 +16,7 @@ var heightScreen2 = 1080;
 
 var floatingTweenAfstand = 500;
 
-var afstandAnimatie = 2000;
+var afstandAnimatie = 1500;
 var rotatieSnelheidAnimatie = 0.02;
 
 var ControllerMovementSpeed = 600;
