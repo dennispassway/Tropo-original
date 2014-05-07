@@ -1,7 +1,7 @@
 // Variabelen
 var updateDelay = 100;
-var controller = [0,0,0,0,0,0,0];
-var aplha, beta, gamma, hoogte, kanteling, bocht,welkeKant;
+var controller = [0,0,0,0,0,0];
+var alpha, beta, gamma, hoogte, kanteling, bocht;
 
 var processingData, closestX, closestY, closestZ;
 
@@ -34,20 +34,17 @@ setInterval(function() {
   hoogte = beta;
   kanteling = gamma;
   // bocht = alpha;
-  welkeKant = controller[6];
 
   // Accelerometer kijkt of beweging is
-  if (arGamma > 0.035 || arGamma < -0.035) {
-    if (arBeta > 0.030 || arBeta < -0.030) {
+  if ((arGamma > 0.035 || arGamma < -0.035) && (arBeta > 0.030 || arBeta < -0.030)) {
       controllerMoves = true;
-    }
   }
   else {
     controllerMoves = false;
   }
 
   // Kinect data
-  if (processingData) {      
+  if (processingData) {
       //Splitten van de data in closest x,y,z
       var res = processingData.split(",");
 
