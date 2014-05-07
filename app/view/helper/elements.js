@@ -37,13 +37,13 @@ pinguin2Loader.load('model/pinguin-2-scooter.js', function (geometry,materials) 
 });
 
 // // Pinguin3
-// pinguin3Loader = new THREE.JSONLoader();
-// pinguin3Loader.load('model/pinguin3.js', function (geometry,materials) { 
-//     pinguin3 = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials)); 
-//     var materials = pinguin3.material.materials;
-//     for (var i = 0,length = materials.length; i < length; i++) { var mat = materials[i]; mat.skinning = true; }
-//     THREE.AnimationHandler.add(pinguin3.geometry.animations[0]);
-// });
+pinguin3Loader = new THREE.JSONLoader();
+pinguin3Loader.load('model/pinguin-3-rocket.js', function (geometry,materials) { 
+    pinguin3 = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials)); 
+    var materials = pinguin3.material.materials;
+    for (var i = 0,length = materials.length; i < length; i++) { var mat = materials[i]; mat.skinning = true; }
+    THREE.AnimationHandler.add(pinguin3.geometry.animations[0]);
+});
 
 // IJsbeer
 ijsbeerLoader = new THREE.JSONLoader();
@@ -55,13 +55,13 @@ ijsbeerLoader.load('model/ijsbeer.js', function (geometry,materials) {
 });
 
 // Narwal
-// narwalLoader = new THREE.JSONLoader();
-// narwalLoader.load('model/narwal.js', function (geometry,materials) { 
-//     narwal = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials)); 
-//     var materials = narwal.material.materials;
-//     for (var i = 0,length = materials.length; i < length; i++) { var mat = materials[i]; mat.skinning = true; }
-//     THREE.AnimationHandler.add(narwal.geometry.animations[0]);
-// });
+narwalLoader = new THREE.JSONLoader();
+narwalLoader.load('model/narwal.js', function (geometry,materials) { 
+    narwal = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials)); 
+    var materials = narwal.material.materials;
+    for (var i = 0,length = materials.length; i < length; i++) { var mat = materials[i]; mat.skinning = true; }
+    THREE.AnimationHandler.add(narwal.geometry.animations[0]);
+});
 
 // Meeuw
 meeuwLoader = new THREE.JSONLoader();

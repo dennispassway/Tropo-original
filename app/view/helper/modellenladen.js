@@ -22,9 +22,9 @@ function modellenLaden(m) {
     object[m].animation = new THREE.Animation(object[m], "PinguinScooter", THREE.AnimationHandler.CATMULLROM);
     object[m].animation.loop = false;
     break;
-    case 'pinguin3':
+    case 'pinguin-rocket':
     object[m] = pinguin3.clone();
-    object[m].animation = new THREE.Animation(object[m], "pinguin3action", THREE.AnimationHandler.CATMULLROM);
+    object[m].animation = new THREE.Animation(object[m], "RocketAction", THREE.AnimationHandler.CATMULLROM);
     object[m].animation.loop = false;
     break;
     case 'ijsbeer':
@@ -34,7 +34,7 @@ function modellenLaden(m) {
     break;
     case 'narwal':
     object[m] = narwal.clone();
-    object[m].animation = new THREE.Animation(object[m], "narwalaction", THREE.AnimationHandler.CATMULLROM);
+    object[m].animation = new THREE.Animation(object[m], "NarwalAction", THREE.AnimationHandler.CATMULLROM);
     object[m].animation.loop = false;
     break;
     case 'meeuw':
