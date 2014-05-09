@@ -2,13 +2,13 @@
 var updateDelay = 100;
 var controller = [0,0,0,0,0,0];
 var alpha, beta, gamma, hoogte, kanteling, bocht;
+
+var processingData, userId, closestX, closestY, closestZ;
 var user0 = [0,0,0];
 var user1 = [0,0,0];
 var user2 = [0,0,0];
 var user3 = [0,0,0];
 var user4 = [0,0,0];
-
-var processingData, closestX, closestY, closestZ;
 
 // iPhone data ophalen
 socket.on('controllerData', function (data) {
@@ -53,9 +53,10 @@ setInterval(function() {
       //Splitten van de data in closest x,y,z
       var res = processingData.split(",");
 
-      closestX = parseFloat(res[0]);
-      closestY = parseFloat(res[1]);
-      closestZ = parseFloat(res[2]);
+      userId = parseFloat(res[0]);
+      closestX = parseFloat(res[1]);
+      closestY = parseFloat(res[2]);
+      closestZ = parseFloat(res[3]);
 
       //Data verwerken per user
       switch (userId) {
