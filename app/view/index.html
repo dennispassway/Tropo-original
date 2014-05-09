@@ -12,14 +12,13 @@
 </head>
 <body>
 
-<div class="startScreen">
-  <h1>Expeditie Tropo</h1>
-  <h3>Een leerzame ontdekkende vlieg ervaring</h3>
+<div id="game">
+  <div id="collectables"></div>
 </div>
 
-  <div id="container">
-    ... loading ...
-  </div>
+<div class="logoScreen"><img src="images/logo-web.png" alt="Tropo"></div>
+<div id="instruction"><img src="images/instruction.gif" alt="Raap het vliegtuig op!" class="instruction-img"></div>
+<div id="container"><img src="images/loader.gif" alt="...loading..." class="loading-image"></div>
 
   <!-- Libraries -->
   <script src="lib/jquery.js"></script>
@@ -42,6 +41,7 @@
   <script src="helper/elements.js"></script>
   <script src="helper/modellenLaden.js"></script>
   <script src="kinect/kinect.js"></script>
+  <script src="helper/game.js"></script>
   <script src="helper/startLoad.js"></script>
 
   <!-- View -->

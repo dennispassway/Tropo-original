@@ -6,14 +6,49 @@ body {
     color: #fff;
 }
 
-.startScreen {
+.loading-image {
+    padding-top: 25%;
+}
+
+.logoScreen {
     width: 100%;
     height: 100%;
-    position: fixed;
-    color: #fff;
-    background-color: rgba(0,0,0,0.2);
-    font-family: arial;
-    text-transform: uppercase;
-    padding-top: 20%;
-    /*display: none;*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #b4cde3;
+    display: none;
+}
+
+.logoScreen img {
+    height: 100%;
+}
+
+#instruction {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(162,190,216,0.8);
+    display: none;
+}
+
+.instruction-img {
+    width: 300px;
+    margin-top: -150px;
+    padding-top: 25%;
+}
+
+#game {
+    padding: 20px;
+    display: block;
+    position: absolute;
+    left: 10;
+    bottom: 0;
+    display: none;
+}
+
+#game img {
+    height: 64px;
+    margin: 5px;
+    opacity: 0.2;
 }
