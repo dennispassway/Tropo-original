@@ -1,7 +1,7 @@
 var activeArea = 9200;
 
 var landWaarde = 0.00100;
-var vliegWaarde = 0.00022;
+var vliegWaarde = 0.00018;
 var densityStijging = (landWaarde-vliegWaarde)/10;
 var startFogAfstand = vliegWaarde;
 
@@ -19,7 +19,7 @@ var floatingTweenAfstand = 500;
 var afstandAnimatie = 1500;
 var rotatieSnelheidAnimatie = 0.02;
 
-var ControllerMovementSpeed = 600;
+var ControllerMovementSpeed = 800;
 var ControllerLookSpeed = 1;
 var ControllerForward = true;
 
