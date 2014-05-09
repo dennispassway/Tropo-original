@@ -32,6 +32,7 @@ function init() {
   // Create world
   container.innerHTML = "";
   container.appendChild( renderer.domElement );
+  $('.logoScreen').fadeIn(1000);
 
   if (processingData) { initKinect(); }
 

@@ -37,15 +37,19 @@ function opstijgenLandenCheck() {
 
 var intervaller;
 function opstijgen() {
-  intervaller = setInterval(function() {
-    if (scene.fog.density > vliegWaarde){ scene.fog.density -= densityStijging; }
-    else { clearInterval(intervaller); }
-  }, 100);
+  // intervaller = setInterval(function() {
+  //   if (scene.fog.density > vliegWaarde){ scene.fog.density -= densityStijging; }
+  //   else { clearInterval(intervaller); }
+  // }, 100);
+  $('#instruction').fadeOut(1000);
+  controls.movementSpeed = ControllerMovementSpeed;
 }
 
 function landen() {
-  intervaller = setInterval(function() {
-    if (scene.fog.density < landWaarde){ scene.fog.density += densityStijging; }
-    else { clearInterval(intervaller); }
-  }, 100);
+  // intervaller = setInterval(function() {
+  //   if (scene.fog.density < landWaarde){ scene.fog.density += densityStijging; }
+  //   else { clearInterval(intervaller); }
+  // }, 100);
+  $('#instruction').fadeIn(1000);
+  controls.movementSpeed = 0;
 }
