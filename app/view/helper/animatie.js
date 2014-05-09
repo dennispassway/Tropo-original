@@ -1,10 +1,9 @@
 function worldAnimation(thisObject) {
 
   this.nearObjectAnimation = function() {
-    if (thisObject.animation){
-      if (!thisObject.animation.isPlaying) {
+    if (thisObject.animation && !thisObject.animation.isPlaying){
         thisObject.animation.play();
-      }
+        game.collectElement(thisObject);
     }
 
     if (typeof thisObject.sound.play == 'function') {
