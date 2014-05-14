@@ -15,7 +15,7 @@ PVector      com2d = new PVector();
 
 void setup()
 {
-  c = new Client(this, "192.168.124.80", 8080);
+  c = new Client(this, "192.168.124.166", 8080);
   
   size(50,50,P3D);
   context = new SimpleOpenNI(this);
@@ -38,7 +38,7 @@ void setup()
               10,150000);
   
   //Framerate 10, maar 10 keer per seconde sturen!
-  frameRate(10);
+  frameRate(24);
 }
 
 void draw()
@@ -85,11 +85,12 @@ void draw()
       endShape();
       
       //Mappen van de waardes
-      com.x = int(map(com.x,-1000, 1000, -1000, 1000));
+      com.x = int(map(com.x,-1000, 1000, 1000, -1000));
       com.y = int(map(com.y, -500, 100, -500, 200));
-      com.z = int(map(com.z, 700, 2800, -1000, -4000));
+      com.z = int(map(com.z, 700, 2800, -4000, -1000));
       
       c.write(i + "," + com.x + "," + com.y + "," + com.z);
+      
     }
   }
 }

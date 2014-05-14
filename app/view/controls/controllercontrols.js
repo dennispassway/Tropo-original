@@ -85,7 +85,7 @@ THREE.FirstPersonControls = function ( object, domElement ) {
     }
 
     this.lon += -kanteling * actualLookSpeed;
-    if( this.lookVertical ) this.lat -= -hoogte * actualLookSpeed * verticalLookRatio;
+    if( this.lookVertical ) this.lat -= hoogte * actualLookSpeed * verticalLookRatio;
 
     this.lat = Math.max( - 85, Math.min( 85, this.lat ) );
     this.phi = THREE.Math.degToRad( 90 - this.lat );
@@ -102,6 +102,12 @@ THREE.FirstPersonControls = function ( object, domElement ) {
     targetPosition.z = position.z + 100 * Math.sin( this.phi ) * Math.sin( this.theta );
 
     this.object.lookAt( targetPosition );
+
+    //  var m1 = new THREE.Matrix4();
+
+    // m1.lookAt( this.position, targetPosition, this.object.up );
+
+    // this.object.quaternion.setFromRotationMatrix( m1 );
 
   };
 

@@ -1,5 +1,6 @@
 var container, camera, controls, scene, renderer, boundingBox;
 var clock = new THREE.Clock();
+var processingData;
 
 function init() {
   container = document.getElementById( 'container' );
@@ -13,7 +14,11 @@ function init() {
   setCameras();
 
   // Controls
-  controls = new THREE.FirstPersonControls( camera );
+  if (!viewNumber || viewNumber == 1)
+  {
+      cameraTarget = new THREE.Object3D();
+      controls = new THREE.FirstPersonControls( cameraTarget );
+  }
 
   // Renderer
   renderer = new THREE.WebGLRenderer( {antialias : true});
@@ -34,7 +39,7 @@ function init() {
   container.appendChild( renderer.domElement );
   $('.logoScreen').fadeIn(1000);
 
-  if (processingData) { initKinect(); }
+  if (typeof gebruikMeeuwen != 'undefined' && gebruikMeeuwen == true && processingData) { initKinect(); }
 
   window.addEventListener( 'resize', onWindowResize, false );
 }
@@ -44,7 +49,7 @@ function animate() {
   requestAnimationFrame( animate );
   checkPositionDistance();
   checkAnimationDistance();
-  processingVerwerks();
+  if (typeof gebruikMeeuwen != 'undefined' && gebruikMeeuwen == true && processingData) { processingVerwerks(); }
   skybox.position.set(camera.position.x,camera.position.y,camera.position.z);
   updateParticles();
   // Object animation update
@@ -57,6 +62,6 @@ function animate() {
 
 // Render
 function render() {
-  controls.update( clock.getDelta() );
+  if (!viewNumber || viewNumber == 1) controls.update( clock.getDelta() );
   renderer.render( scene, camera );
 } 

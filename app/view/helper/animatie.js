@@ -3,7 +3,7 @@ function worldAnimation(thisObject) {
   this.nearObjectAnimation = function() {
     if (thisObject.animation && !thisObject.animation.isPlaying){
         thisObject.animation.play();
-        game.collectElement(thisObject);
+        if (game) game.collectElement(thisObject);
     }
 
     if (typeof thisObject.sound.play == 'function') {
@@ -11,7 +11,7 @@ function worldAnimation(thisObject) {
     }
   }
 
-  this.movementAnimation = function() {
+  /*this.movementAnimation = function() {
     switch(thisObject.type) {
     case 'wolk1':
       thisObject.position.x += 6;
@@ -43,6 +43,6 @@ function worldAnimation(thisObject) {
       thisObject.position.y += 6;
     break;
     }
-  }
+  }*/
 
 }

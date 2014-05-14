@@ -7,19 +7,17 @@ var startFogAfstand = vliegWaarde;
 
 var fov = 40;
 var near = 1;
-var far = activeArea+4000;
+var far = activeArea+4500;
 
-var widthScreen1 = 1920;
-var heightScreen1 = 1080;
-var widthScreen2 = 1920;
-var heightScreen2 = 1080;
+var widthScreen = 1400;
+var heightScreen = 1050;
 
 var floatingTweenAfstand = 500;
 
 var afstandAnimatie = 1500;
 var rotatieSnelheidAnimatie = 0.02;
 
-var ControllerMovementSpeed = 800;
+var ControllerMovementSpeed = 1000;
 var ControllerLookSpeed = 1;
 var ControllerForward = true;
 
@@ -30,3 +28,8 @@ var MouseForward = false;
 var controllerMoves = false;
 
 var boundingBoxScale = 900;
+
+var cameraTarget;
+
+/* 0 = plane , 1 = leap,*/ 
+var instructionUsed = 0;

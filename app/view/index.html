@@ -8,17 +8,17 @@
   <link rel="stylesheet" type="text/css" href="style.css">
   <script src="/socket.io/socket.io.js"></script>
   <script src="/socketConnect.js"></script>
-  <script src="socket/socket.js"></script>
 </head>
 <body>
 
 <div id="game">
-  Score: <span id="score">0</span>
+  <span id="score">0</span>
   <div id="collectables"></div>
 </div>
 
 <div class="logoScreen"><img src="images/logo-web.png" alt="Tropo"></div>
 <div id="instruction"><img src="images/instruction.gif" alt="Raap het vliegtuig op!" class="instruction-img"></div>
+<div id="leapInstruction"><img src="images/leap-instruction.gif" alt="Raap het vliegtuig op!" class="instruction-img"></div>
 <div id="container"><img src="images/loader.gif" alt="...loading..." class="loading-image"></div>
 
   <!-- Libraries -->
@@ -26,9 +26,6 @@
   <script src="lib/three.min.js"></script>
   <!-- Variables -->
   <script src="helper/vars.js"></script>
-  <!-- Controls -->
-  <!-- <script src="controls/controllercontrols.js"></script> -->
-  <script src="controls/mousecontrols.js"></script>
   <!-- Dependencies -->
   <script src="helper/database.js"></script>
   <script src="helper/helperFunctions.js"></script>
@@ -41,12 +38,21 @@
   <script src="helper/sound.js"></script>
   <script src="helper/elements.js"></script>
   <script src="helper/modellenLaden.js"></script>
-  <script src="kinect/kinect.js"></script>
+  <!-- <script src="kinect/kinect.js"></script> -->
   <script src="helper/findGame.js"></script>
   <script src="helper/startLoad.js"></script>
+  <!-- Controls -->
+  <!-- <script src="socket/controllerSocket.js"></script><script src="controls/controllercontrols.js"></script> -->
+  <script src="lib/leap.js"></script><script src="socket/leapSocket.js"></script><script src="controls/controllercontrols.js"></script>
+  <!-- <script src="socket/kinectSocket.js"></script><script src="controls/controllercontrols.js"></script> -->
+
+  <!-- <script src="controls/mousecontrols.js"></script> -->
 
   <!-- View -->
   <script src="view.js"></script>
+
+  <!-- Communicate with other views -->
+  <script src="socket/cameraPosition.js"></script>
 
 </body>
 </html>

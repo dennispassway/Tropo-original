@@ -5,6 +5,8 @@ var app = require('express')();
 
 var server = require('http').createServer(app).listen(3000);
 var io = require('socket.io').listen(server);
+// Log only warnings
+io.set('log level', 1);
 
 // Public folder
 app.use(express.static(path.join(__dirname, 'app')));
@@ -32,6 +34,11 @@ io.sockets.on('connection', function (socket) {
     socket.broadcast.emit('controllerData', data);
   });
 
+  // Mainview camera data
+  socket.on('mainCameraPosition', function(data) {
+    io.sockets.emit('CameraPositionData', data);
+  });
+
   // Track kinect processingData
   setInterval(function() {
     data = processingMessage.toString();
@@ -51,5 +58,13 @@ io.sockets.on('connection', function (socket) {
     console.log('Stop Tropo!');
     socket.broadcast.emit('stopApp');
   });
-  
+
+  // Landen Opstijgen
+  socket.on('opstijgen', function() {
+    io.sockets.emit('opstijgen');
+  });
+  socket.on('landen', function() {
+    io.sockets.emit('landen');
+  });
+
 });

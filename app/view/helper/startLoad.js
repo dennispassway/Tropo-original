@@ -10,6 +10,11 @@ socket.on('startApp', function() {
   startApp();
 });
 
+  // Reset knop
+  socket.on('stopApp', function () {
+    location.reload();
+  });
+
 function startApp() {
 
   setTimeout(function(){
@@ -18,7 +23,7 @@ function startApp() {
   },500);
 
   // Create Game
-  game.init();
+  if (!viewNumber || viewNumber == 1) game.init();
 
   animate();
   opstijgenLandenCheck();

@@ -6,11 +6,17 @@ function getUrlVars() {
   });
   return vars;
 }
+numberURL = (getUrlVars('view'));
+viewNumber = (numberURL.view);
 
-// Radians to degree
+// Radians to degree and visa versa
 function toRadian(degree) {
   radian = degree/57.2957795;
   return radian;
+}
+function toDegree(radian) {
+  degree = radian*57.2957795;
+  return degree;
 }
 
 // Window resize functie
