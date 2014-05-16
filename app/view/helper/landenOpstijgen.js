@@ -52,7 +52,7 @@ function opstijgen() {
   $('#flyInstruction').fadeIn(1000);
   setTimeout(function() {
     $('#flyInstruction').fadeOut(1000);
-  }, 5000);
+  }, 6500);
 }
 
 function landen() {
