@@ -12,20 +12,30 @@
 <body>
 
 <div id="game">
-  <span id="score">0</span>
-  <div id="collectables"></div>
+  <div id="elementBlock">
+    <span id="element"><img src="images/icons/ijsbeer.png" alt="pinguin"></span>
+    <img src="images/icons/aim.png" id="aim" alt="aim">
+  </div>
+  <div id="scoreBlock">
+    <span id="score">0</span>  /  <span id="totalScore">100</span>
+  </div>
 </div>
 
 <div class="logoScreen"><img src="images/logo-web.png" alt="Tropo"></div>
+<div class="completedScreen"><img src="images/completed.png" alt="Game completed!"></div>
+
 <div id="instruction"><img src="images/instruction.gif" alt="Raap het vliegtuig op!" class="instruction-img"></div>
 <div id="leapInstruction"><img src="images/leap-instruction.gif" alt="Raap het vliegtuig op!" class="instruction-img"></div>
+<div id="flyInstruction"><img src="images/leap-instruction.gif" alt="Raap het vliegtuig op!" class="instruction-img"></div>
 <div id="container"><img src="images/loader.gif" alt="...loading..." class="loading-image"></div>
 
   <!-- Libraries -->
   <script src="lib/jquery.js"></script>
   <script src="lib/three.min.js"></script>
+  
   <!-- Variables -->
   <script src="helper/vars.js"></script>
+
   <!-- Dependencies -->
   <script src="helper/database.js"></script>
   <script src="helper/helperFunctions.js"></script>
@@ -39,11 +49,13 @@
   <script src="helper/elements.js"></script>
   <script src="helper/modellenLaden.js"></script>
   <!-- <script src="kinect/kinect.js"></script> -->
+  <script src="helper/changeColors.js"></script>
   <script src="helper/findGame.js"></script>
   <script src="helper/startLoad.js"></script>
+
   <!-- Controls -->
-  <!-- <script src="socket/controllerSocket.js"></script><script src="controls/controllercontrols.js"></script> -->
-  <script src="lib/leap.js"></script><script src="socket/leapSocket.js"></script><script src="controls/controllercontrols.js"></script>
+  <script src="socket/controllerSocket.js"></script><script src="controls/controllercontrols.js"></script>
+  <!-- <script src="lib/leap.js"></script><script src="socket/leapSocket.js"></script><script src="controls/controllercontrols.js"></script> -->
   <!-- <script src="socket/kinectSocket.js"></script><script src="controls/controllercontrols.js"></script> -->
 
   <!-- <script src="controls/mousecontrols.js"></script> -->

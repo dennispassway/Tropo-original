@@ -25,6 +25,21 @@ body {
     height: 100%;
 }
 
+.completedScreen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 999999999;
+    top: 0;
+    left: 0;
+    background-color: #f15a22;
+    display: none;
+}
+
+.completedScreen img {
+    height: 100%;
+}
+
 #instruction {
     width: 100%;
     height: 100%;
@@ -47,27 +62,61 @@ body {
     display: none;
 }
 
-#game {
-    padding: 15px;
-    display: block;
+#flyInstruction {
+    width: 100%;
+    height: 100%;
     position: absolute;
-    right: 0;
+    background-color: rgba(162,190,216,0.4);
     display: none;
-    background-color: #fff;
-    border: solid 1px #ccc;
-    border-radius: 5px;
-    color: #333;
-    font-family: verdana, sans-serif;
-    font-weight: 800;
-    font-size: 32px;
 }
 
-#game #score {
-    margin-bottom: 50px;
-}
+/*Game*/
+#game {
+      position: absolute;
+      top: 50%;
+      right: 50%;
+      margin: -64px -64px 0 0;
+      display: none;
+    }
 
-#game img {
-    height: 128px;
-    margin: 5px;
-    opacity: 1;
-}
+    #elementBlock {
+      background-color: #FFF;
+      border-radius: 20px;
+      padding: 10px;
+      width: 128px;
+      height: 128px;
+      position: relative;
+    }
+
+    #element {
+      display: none;
+    }
+
+    #aim {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: none;
+    }
+
+    #scoreBlock {
+      color: #FFF;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 24px;
+      font-weight: 400;
+      font-family: arial;
+      background-color: #F15A22;
+      padding: 10px;
+      border-radius: 20px;
+      display: none;
+    }
+
+    #score {
+      font-weight: 800;
+      font-size: 48px;
+    }
+
+    #totalScore {
+      font-size: 24px;
+    }

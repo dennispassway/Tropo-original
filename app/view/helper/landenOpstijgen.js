@@ -49,6 +49,10 @@ function opstijgen() {
   if (instructionUsed == 0 ) $('#instruction').fadeOut(1000);
   if (instructionUsed == 1 ) $('#leapInstruction').fadeOut(1000);
   if (controls) controls.movementSpeed = ControllerMovementSpeed;
+  $('#flyInstruction').fadeIn(1000);
+  setTimeout(function() {
+    $('#flyInstruction').fadeOut(1000);
+  }, 5000);
 }
 
 function landen() {

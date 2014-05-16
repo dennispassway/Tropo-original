@@ -67,4 +67,9 @@ io.sockets.on('connection', function (socket) {
     io.sockets.emit('landen');
   });
 
+  // Game completed
+  socket.on('gameCompleted', function() {
+    io.sockets.emit('gameCompleted');
+  });
+
 });
