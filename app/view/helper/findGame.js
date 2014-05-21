@@ -28,7 +28,7 @@ if (!viewNumber || viewNumber == 1) {
     },
 
     score: 0,
-    totalScore: 15,
+    totalScore: 10,
     addScore: function(points) { 
       this.score = (points && points != 0) ? this.score+points : this.score+1;
 
