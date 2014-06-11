@@ -6,14 +6,10 @@ function loadApp() {
 loadApp();
 
 // Start Application
-socket.on('startApp', function() {
-  startApp();
-});
+socket.on('startApp', function() { startApp(); });
 
-  // Reset knop
-  socket.on('stopApp', function () {
-    location.reload();
-  });
+// Reset knop
+socket.on('stopApp', function () { location.reload(); });
 
 function startApp() {
 

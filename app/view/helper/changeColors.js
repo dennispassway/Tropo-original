@@ -6,11 +6,9 @@ defaultClearColor = '#A2BED8';
 redClearColor =  '#d98282';
 blueClearColor = '#77a9d8';
 yellowClearColor = '#ece686';
-
 purpleClearColor = '#d982d0';
 orangeClearColor = '#d9a782';
 greenClearColor = '#8cd982';
-
 grayClearColor = '#d9d9d9';
 
 setInterval(function() {

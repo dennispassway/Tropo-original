@@ -19,7 +19,7 @@ function checkPositionDistance(i) {
   }
 
   // Particles
-  if(particleSystem.position.distanceTo(camera.position) > activeArea) {
+  if(particleSystem && particleSystem.position.distanceTo(camera.position) > activeArea) {
     particleVerschilX = particleSystem.position.x - camera.position.x;
     particleVerschilY = particleSystem.position.y - camera.position.y;
     particleVerschilZ = particleSystem.position.z - camera.position.z;
@@ -45,7 +45,12 @@ function checkAnimationDistance() {
 // Sky Box
 function loadSkyBox() {
   skyboxLoader = new THREE.JSONLoader();
-  skyboxLoader.load('model/boundingBox/boundingBox.js', function (geometry,materials) { 
+  
+  skyboxModel = 'model/boundingBox/boundingBox.js';
+  if (worldNumber == 1) skyboxModel = 'model/boundingBox/boundingBox.js';
+  if (worldNumber == 2) skyboxModel = 'model/nijntje/boundingBox/boundingBox.js';
+
+  skyboxLoader.load(skyboxModel, function (geometry,materials) { 
       skybox = new THREE.SkinnedMesh(geometry, new THREE.MeshFaceMaterial(materials)); 
       skybox.scale.set(7,7,7);
       scene.add(skybox);

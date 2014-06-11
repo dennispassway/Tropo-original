@@ -28,7 +28,9 @@ function addParticles() {
 }
 
 function updateParticles() {
-  particleSystem.rotation.x += 0.004;
-  particleSystem.rotation.y += 0.002;
-  particleSystem.rotation.z += 0.001;
+  if (particleSystem) {
+    particleSystem.rotation.x += 0.004;
+    particleSystem.rotation.y += 0.002;
+    particleSystem.rotation.z += 0.001;
+  }
 }

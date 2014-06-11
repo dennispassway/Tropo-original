@@ -32,7 +32,7 @@ function init() {
 
   // Bounding Box & Particles
   loadSkyBox();
-  addParticles();
+  if (!worldNumber || worldNumber == 1) addParticles();
 
   // Create world
   container.innerHTML = "";

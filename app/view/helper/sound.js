@@ -19,6 +19,28 @@ function sound(thisObject) {
     case 'meeuw':
         return meeuwSound;
     break;
+
+    case 'nijntjeBal':
+        return nijntjeBalSound;
+    break;
+    case 'nijntjeBeer':
+        return nijntjeBeerSound;
+    break;
+    case 'nijntjeMaan':
+        return nijntjeMaanSound;
+    break;
+    case 'nijntjeNijntje':
+        return nijntjeNijntjeSound;
+    break;
+    case 'nijntjeOlifant':
+        return nijntjeOlifantSound;
+    break;
+    case 'nijntjeVogel':
+        return nijntjeVogelSound;
+    break;
+    case 'nijntjeZon':
+        return nijntjeZonSound;
+    break;
   }
 
 }

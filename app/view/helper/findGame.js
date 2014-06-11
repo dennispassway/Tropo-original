@@ -1,14 +1,13 @@
 if (!viewNumber || viewNumber == 1) {
-  var game = {
 
-    collectableElements: [
-      'ijsbeer',
-      'narwal',
-      'pinguin-rocket',
-      'pinguin-jetpack',
-      'pinguin-scooter',
-      'meeuw'
-    ],
+  noordpoolElements = [ 'ijsbeer', 'narwal', 'pinguin-rocket', 'pinguin-jetpack', 'pinguin-scooter', 'meeuw'];
+  nijntjeElements = ['nijntjeBal', 'nijntjeBeer', 'nijntjeMaan', 'nijntjeNijntje', 'nijntjeOlifant', 'nijntjeVogel', 'nijntjeZon'];
+  usedElements = noordpoolElements;
+  if (!worldNumber || worldNumber == 1) usedElements = noordpoolElements;
+  if (!worldNumber || worldNumber == 2) usedElements = nijntjeElements;
+
+  var game = {
+    collectableElements: usedElements,
     elementToCollect: 'ijsbeer',
     createElementToCollect: function() {
       number = Math.floor(Math.random() * this.collectableElements.length);

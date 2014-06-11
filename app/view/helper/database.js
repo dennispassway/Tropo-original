@@ -1,7 +1,13 @@
 var jsonSet = [];
 var databaseReady = false;
 
-$.getJSON('https://spreadsheets.google.com/feeds/list/0AtGWqQf8eM2OdHVsS2w2QWI5NFhJN2tJUXlLTkhFRUE/od6/public/values?alt=json', function(data){
+var databaseNumber = worldNumber;
+var databaseSheet = 'https://spreadsheets.google.com/feeds/list/0AtGWqQf8eM2OdHVsS2w2QWI5NFhJN2tJUXlLTkhFRUE/1/public/values?alt=json';
+
+if (databaseNumber == 1) databaseSheet = 'https://spreadsheets.google.com/feeds/list/0AtGWqQf8eM2OdHVsS2w2QWI5NFhJN2tJUXlLTkhFRUE/1/public/values?alt=json';
+if (databaseNumber == 2) databaseSheet = 'https://spreadsheets.google.com/feeds/list/0AtGWqQf8eM2OdHVsS2w2QWI5NFhJN2tJUXlLTkhFRUE/2/public/values?alt=json';
+
+$.getJSON(databaseSheet, function(data){
 
   for (var i = 0; i < data.feed.entry.length; i++) {
     name = data.feed.entry[i].gsx$name.$t;
@@ -19,9 +25,7 @@ $.getJSON('https://spreadsheets.google.com/feeds/list/0AtGWqQf8eM2OdHVsS2w2QWI5N
     jsonSet.push(object);
 
     // Als forloop klaar is, is database klaar, dus init.
-    if (i == data.feed.entry.length-1) {
-        databaseReady = true;
-    }
+    if (i == data.feed.entry.length-1) databaseReady = true;
     
   }
 

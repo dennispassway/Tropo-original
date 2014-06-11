@@ -1,1 +1,1 @@
-var socket = io.connect('http://192.168.124.154:3000');
+var socket = io.connect('http://192.168.124.58:3000');

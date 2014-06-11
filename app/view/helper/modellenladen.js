@@ -42,6 +42,56 @@ function modellenLaden(m) {
     object[m].animation = new THREE.Animation(object[m], "MeeuwAction", THREE.AnimationHandler.CATMULLROM);
     object[m].animation.loop = false;
     break;
+    case 'nijntjeBal':
+    object[m] = nijntjeBal.clone();
+    object[m].animation = new THREE.Animation(object[m], "BalAction", THREE.AnimationHandler.CATMULLROM);
+    object[m].animation.loop = false;
+    break;
+    case 'nijntjeBeer':
+    object[m] = nijntjeBeer.clone();
+    object[m].animation = new THREE.Animation(object[m], "nijntjeBeerAction", THREE.AnimationHandler.CATMULLROM);
+    object[m].animation.loop = false;
+    break;
+    case 'nijntjeMaan':
+    object[m] = nijntjeMaan.clone();
+    object[m].animation = new THREE.Animation(object[m], "nijntjeMaanAction", THREE.AnimationHandler.CATMULLROM);
+    object[m].animation.loop = false;
+    break;
+    case 'nijntjeNijntje':
+    object[m] = nijntjeNijntje.clone();
+    object[m].animation = new THREE.Animation(object[m], "nijntjeAction", THREE.AnimationHandler.CATMULLROM);
+    object[m].animation.loop = false;
+    break;
+    case 'nijntjeOlifant':
+    object[m] = nijntjeOlifant.clone();
+    object[m].animation = new THREE.Animation(object[m], "nijntjeOlifantAction", THREE.AnimationHandler.CATMULLROM);
+    object[m].animation.loop = false;
+    break;
+    case 'nijntjeVogel':
+    object[m] = nijntjeVogel.clone();
+    object[m].animation = new THREE.Animation(object[m], "nijntjeVogelAction", THREE.AnimationHandler.CATMULLROM);
+    object[m].animation.loop = false;
+    break;
+    case 'nijntjeZon':
+    object[m] = nijntjeZon.clone();
+    object[m].animation = new THREE.Animation(object[m], "nijntjeZonAction", THREE.AnimationHandler.CATMULLROM);
+    object[m].animation.loop = false;
+    break;
+    case 'nijntjeWolk1':
+    object[m] = nijntjeWolk1.clone();
+    object[m].animation = new THREE.Animation(object[m], "nijntjeWolkAction", THREE.AnimationHandler.CATMULLROM);
+    object[m].animation.loop = false;
+    break;
+    case 'nijntjeWolk2':
+    object[m] = nijntjeWolk2.clone();
+    object[m].animation = new THREE.Animation(object[m], "nijntjeWolk2Action", THREE.AnimationHandler.CATMULLROM);
+    object[m].animation.loop = false;
+    break;
+    case 'nijntjeWolk3':
+    object[m] = nijntjeWolk3.clone();
+    object[m].animation = new THREE.Animation(object[m], "nijntjeWolk3Action", THREE.AnimationHandler.CATMULLROM);
+    object[m].animation.loop = false;
+    break;
   }
 
   object[m].name = jsonSet[m].name;

@@ -27,23 +27,14 @@ function opstijgenLandenCheck() {
           vliegend = false;
       }
     }
-    // Debuglines
-    // console.log('vlieg: ' + vliegend);
-    // console.log('moves: ' + controllerMoves);
-    // console.log('seconden beweegs: ' + secondenBeweegs);
-    // console.log('seconden stil: ' + secondenStil);
   }, 1000);
 }
 
 var intervaller;
 
 // Socket gets data
-socket.on('opstijgen', function () {
-  opstijgen();
-});
-socket.on('landen', function () {
-  landen();
-});
+socket.on('opstijgen', function () { opstijgen(); });
+socket.on('landen', function () { landen(); });
 
 function opstijgen() {
   if (instructionUsed == 0 ) $('#instruction').fadeOut(1000);

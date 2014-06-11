@@ -8,6 +8,8 @@ function getUrlVars() {
 }
 numberURL = (getUrlVars('view'));
 viewNumber = (numberURL.view);
+worldURL = (getUrlVars('world'));
+worldNumber = worldURL.world;
 
 // Radians to degree and visa versa
 function toRadian(degree) {
