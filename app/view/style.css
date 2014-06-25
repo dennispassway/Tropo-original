@@ -4,6 +4,7 @@ body {
     text-align: center;
     background-color: #000;
     color: #fff;
+    overflow: hidden;
 }
 
 .loading-image {
@@ -120,3 +121,23 @@ body {
     #totalScore {
       font-size: 24px;
     }
+
+#platformAnimations img {
+  position: absolute;
+  left: 20px;
+  bottom: -120px;
+  z-index: 9999999999;
+  height: 100px;
+}
+
+#platformAnimations .varken img {
+  left: 50px;
+}
+
+#platformAnimations .schaap img {
+  left: 400px;
+}
+
+#platformAnimations .koe img {
+  left: 800px;
+}
