@@ -73,3 +73,32 @@ io.sockets.on('connection', function (socket) {
   });
 
 });
+
+/* ARDUINO SETUP */
+var SerialPort = require("serialport").SerialPort
+var serialPort = new SerialPort("/dev/cu.usbmodemfa131", {
+  baudrate: 9600
+});
+
+var buttons = [0,0,0];
+function resetButtonPressed(number) {
+  setTimeout(function() {
+    buttons[number] = 0;
+    io.sockets.emit('buttons', buttons);
+  }, 1000);
+}
+
+/* ARDUINO FUNCTION */
+if (typeof(serialPort) != "undefined"){
+  serialPort.on("open", function () {
+  serialPort.on('data', function(data) {
+    data = Math.floor(data / (Math.pow(10, 0)) % 10);
+    buttons[data] = 1;
+
+    io.sockets.emit('buttons', buttons);
+
+    resetButtonPressed(data);
+
+  });
+});
+}

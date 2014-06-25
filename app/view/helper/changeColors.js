@@ -1,4 +1,7 @@
-var buttons = [0,0,0];
+var buttons = [0, 0, 0];
+socket.on('buttons', function(data) {
+  buttons = data;
+});
 
 getButtonsInterval = 1000;
 
