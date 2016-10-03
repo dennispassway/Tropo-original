@@ -5,6 +5,7 @@ var updateDelay = 100;
 var arAlpha = 0;
 var arBeta = 0;
 var arGamma = 0;
+
 window.ondevicemotion = function(event) {
   arAlpha = event.acceleration.x
   arBeta = event.acceleration.y
@@ -16,10 +17,11 @@ window.ondevicemotion = function(event) {
 var alpha = 1;
 var beta = 1;
 var gamma = 1;
+
 window.ondeviceorientation = function(event) {
   alpha = event.alpha;
   beta = event.beta;
-  gamma = event.gamma;
+  gamma = - event.gamma;
 }
 
 // Lerp variabelen
@@ -27,6 +29,7 @@ var alphaNew, betaNew, gammaNew;
 var alphaLast = 0;
 var betaLast = 0;
 var gammaLast = 0;
+
 // Lerpfunctie van alpha, beta en gamma voor soepelheid
 function lerp(a, b, t) {
   result = (a + ( t * (b - a) ) );
@@ -39,7 +42,7 @@ setInterval(function() {
   // Check Gyro
   if (gamma < -90) { gamma = -180 - gamma; }
   if (gamma > 90) { gamma = 180 - gamma; }
-  
+
   // Lerp values
   alphaNew = alpha;
   alpha = lerp(alphaNew, alphaLast, 0.5);

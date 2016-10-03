@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
   <title>Tropo Admin Area</title>
   <meta charset="utf-8">
@@ -16,12 +16,12 @@
   <script>
     function startAppButton() {
       socket.emit('startApplicationPressed');
-      document.getElementById('state').innerHTML = "";
+      document.getElementById('state').innerHTML = '';
       document.getElementById('state').appendChild(document.createTextNode('Tropo is started. Enjoy!'));
     }
     function stopAppButton() {
       socket.emit('stopApplicationPressed');
-      document.getElementById('state').innerHTML = "";
+      document.getElementById('state').innerHTML = '';
       document.getElementById('state').appendChild(document.createTextNode('Tropo is Stopped. Start it again!'));
     }
   </script>

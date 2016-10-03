@@ -37,9 +37,9 @@ socket.on('opstijgen', function () { opstijgen(); });
 socket.on('landen', function () { landen(); });
 
 function opstijgen() {
-  if (instructionUsed == 0 ) $('#instruction').fadeOut(1000);
-  if (instructionUsed == 1 ) $('#leapInstruction').fadeOut(1000);
+  $('#instruction').fadeOut(1000);
   if (controls) controls.movementSpeed = ControllerMovementSpeed;
+
   $('#flyInstruction').fadeIn(1000);
   setTimeout(function() {
     $('#flyInstruction').fadeOut(1000);
@@ -47,7 +47,6 @@ function opstijgen() {
 }
 
 function landen() {
-  if (instructionUsed == 0 ) $('#instruction').fadeIn(1000);
-  if (instructionUsed == 1 ) $('#leapInstruction').fadeIn(1000);
+  $('#instruction').fadeIn(1000);
   if (controls) controls.movementSpeed = 0;
 }

@@ -30,6 +30,3 @@ var controllerMoves = false;
 var boundingBoxScale = 900;
 
 var cameraTarget;
-
-/* 0 = plane , 1 = leap,*/ 
-var instructionUsed = 0;

@@ -1,126 +1,118 @@
 body {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    background-color: #000;
-    color: #fff;
-    overflow: hidden;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background-color: #000;
+  color: #fff;
+  overflow: hidden;
 }
 
 .loading-image {
-    padding-top: 25%;
+  padding-top: 25%;
 }
 
 .logoScreen {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: 999999999;
-    top: 0;
-    left: 0;
-    background-color: #b4cde3;
-    display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 999999999;
+  top: 0;
+  left: 0;
+  background-color: #b4cde3;
+  display: none;
 }
 
 .logoScreen img {
-    height: 100%;
+  height: 100%;
 }
 
 .completedScreen {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: 999999999;
-    top: 0;
-    left: 0;
-    background-color: #f15a22;
-    display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 999999999;
+  top: 0;
+  left: 0;
+  background-color: #f15a22;
+  display: none;
 }
 
 .completedScreen img {
-    height: 100%;
+  height: 100%;
 }
 
 #instruction {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background-color: rgba(162,190,216,0.8);
-    display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(162,190,216,0.8);
+  display: none;
 }
 
 .instruction-img {
-    width: 300px;
-    margin-top: -150px;
-    padding-top: 25%;
-}
-
-#leapInstruction {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background-color: rgba(162,190,216,0.8);
-    display: none;
+  width: 300px;
+  margin-top: -150px;
+  padding-top: 25%;
 }
 
 #flyInstruction {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background-color: rgba(162,190,216,0.4);
-    display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(162,190,216,0.4);
+  display: none;
 }
 
 /*Game*/
 #game {
-      position: absolute;
-      top: 50%;
-      right: 50%;
-      margin: -64px -64px 0 0;
-      display: none;
-    }
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  margin: -64px -64px 0 0;
+  display: none;
+}
 
-    #elementBlock {
-      background-color: #FFF;
-      border-radius: 20px;
-      padding: 10px;
-      width: 128px;
-      height: 128px;
-      position: relative;
-    }
+#elementBlock {
+  background-color: #FFF;
+  border-radius: 20px;
+  padding: 10px;
+  width: 128px;
+  height: 128px;
+  position: relative;
+}
 
-    #element {
-      display: none;
-    }
+#element {
+  display: none;
+}
 
-    #aim {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      display: none;
-    }
+#aim {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: none;
+}
 
-    #scoreBlock {
-      color: #FFF;
-      text-align: center;
-      margin-top: 10px;
-      font-size: 24px;
-      font-weight: 400;
-      font-family: arial;
-      background-color: #F15A22;
-      padding: 10px;
-      border-radius: 20px;
-      display: none;
-    }
+#scoreBlock {
+  color: #FFF;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 24px;
+  font-weight: 400;
+  font-family: arial;
+  background-color: #F15A22;
+  padding: 10px;
+  border-radius: 20px;
+  display: none;
+}
 
-    #score {
-      font-weight: 800;
-      font-size: 48px;
-    }
+#score {
+  font-weight: 800;
+  font-size: 48px;
+}
 
-    #totalScore {
-      font-size: 24px;
-    }
+#totalScore {
+  font-size: 24px;
+}
 
 #platformAnimations img {
   position: absolute;
